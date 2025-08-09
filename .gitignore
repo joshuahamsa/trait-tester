@@ -114,3 +114,7 @@ pids
 
 # TernJS port file
 .tern-port
+
+# Project specific
+OGtraits/
+.mypy_cache/
