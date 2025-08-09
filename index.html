@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dress Up Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Trait Combination Preview</h1>
+  <div id="controls">
+    <!-- Drop‑down selectors will be populated by script.js -->
+  </div>
+  <div id="randomize-container">
+    <button id="randomize-btn" type="button">🎲 Randomize Traits</button>
+  </div>
+  <div id="preview-wrapper">
+    <!-- Each layer will be an <img> inside this container -->
+    <div id="preview" class="preview">
+      <!-- images inserted by script.js -->
+    </div>
+  </div>
+  <!-- Embed the trait manifest directly into the page so that
+       fetching from file:// is not required.  The script reads
+       this JSON via document.getElementById('trait-manifest').textContent. -->
+  <script id="trait-manifest" type="application/json">
+    {
+      "skin": [
+        "Abyssal Glow.png",
+        "Ancient Amber.png",
+        "Celestial Alchemy.png",
+        "Celestial Prism.png",
+        "Chromatic Armor.png",
+        "Cosmic Cheetah Fur.png",
+        "Default.png",
+        "Digital Mirage.png",
+        "Dragon's Blood.png",
+        "Enchanted Onyx.png",
+        "Grey Marble.png",
+        "Interstellar Aurora.png",
+        "Lunar Crystaline.png",
+        "Necromancer's Veil.png",
+        "Oblivion Fossil Hide.png",
+        "Obsidian Flame.png",
+        "Phoenix Feathers.png",
+        "Psychedelic Spectrum.png",
+        "Quantum Circuitry.png",
+        "Royal Blossom.png",
+        "Sapphire Frost.png",
+        "Starlit Frost.png",
+        "Tropical Mirage.png"
+      ],
+      "clothes": [
+        "Abyssal Harpooner.png",
+        "Abyssal Illusion Tee.png",
+        "Apelink.png",
+        "Apocalyptic Warrior.png",
+        "Baynana Avenger.png",
+        "Boardhide Gear.png",
+        "Cypherlord.png",
+        "Desert Raider.png",
+        "Elite Stealth.png",
+        "Forest Sovereign.png",
+        "Forester's Guard.png",
+        "Gothic Bride.png",
+        "Jungle Sovereign.png",
+        "Midnight Regalia.png",
+        "Night Operative's Gear.png",
+        "Oni Kimono.png",
+        "Outlaw Elite.png",
+        "Outlaw Overlord.png",
+        "Predator s Prize.png",
+        "Rainforest Mosaic.png",
+        "Red Toddler.png",
+        "Sailor.png",
+        "Shadow Weaver's Neckpiece.png",
+        "Shaman's Heirloom.png",
+        "Sovereign's Amulet.png",
+        "Sovereign's Mantle.png",
+        "Spacecuit to Cosmic Conqueror.png",
+        "Stormbringer Jersey.png",
+        "Streetwise Swagger.png",
+        "Tanktop Dark Warrior s Cuirass.png",
+        "Tie Dye to Nebula Core tee.png",
+        "Tribal Warrior.png",
+        "Tropical Overlord Straps.png",
+        "Tropical Rebel.png",
+        "Warlock's Shroud.png",
+        "Warlord's Fur Mantle.png",
+        "Warlord's Robe.png",
+        "Warrior of the Fields.png",
+        "Warrior's Tunic.png",
+        "XRP Cryptowear Hoodie.png"
+      ],
+      "mouth": [
+        "Abyssal Shine Grill.png",
+        "Angry.png",
+        "Apocalyptic Slice.png",
+        "Baynana Puff.png",
+        "Bite Lips.png",
+        "Bite Teeth.png",
+        "Bronzed Decay Bite.png",
+        "Cigarette to Nuclear Stogie.png",
+        "Coin to Pandemonium Pact Coin.png",
+        "Cyber Furnace-Cigar.png",
+        "Golden Teeth to Sovereign Fang Grill.png",
+        "Happy.png",
+        "Hot Dog to Inferno Hot Dog.png",
+        "Ledger to Bite-Sec Ledger.png",
+        "Mischief's Binky.png",
+        "Multicolor Grill to Prismatic Bite.png",
+        "No Expression.png",
+        "Normal.png",
+        "Pacifier to Mischief's Binky.png",
+        "Party Horn to Raucous Reveler.png",
+        "Piano Grill.png",
+        "Piano Grills to Piano Grills 2.png",
+        "Pipe to Baynana Puff.png",
+        "Pizza to Apocalyptic Slice.png",
+        "Rainbow to Prism Jaw  Copy.png",
+        "Raucous Reveler.png",
+        "Rotten Grill to Bronzed Decay Bite.png",
+        "S.png",
+        "Sad.png",
+        "Shard Blade.png",
+        "Smug.png",
+        "Stitched to Zipper Maw.png",
+        "Thorned Rose.png",
+        "Timber Fang Grill.png",
+        "Tongue.png",
+        "Wooden Grill to Timber Fang Grill.png",
+        "Yawn.png",
+        "Yelling.png",
+        "Zipper Maw.png"
+      ],
+      "eyes": [
+        "Angry.png",
+        "Arrogant.png",
+        "Battle-Scarred Tactical Eyepatch.png",
+        "Broken Optic Glasses.png",
+        "Brokenana Coins.png",
+        "Closed Eyes.png",
+        "Cooling Fury Lazers.png",
+        "Cyberpunk Visors.png",
+        "Dimensional Spectra Frames.png",
+        "Eyes.png",
+        "Happy.png",
+        "Inferno Heart Eyes.png",
+        "Mystic Veil Vision.png",
+        "Normal.png",
+        "Red Lazer.png",
+        "Retro Neon Eclipse.png",
+        "Sad.png",
+        "Scar.png",
+        "Scared.png",
+        "Shocked.png",
+        "Shutter.png",
+        "Shy.png",
+        "Stoned.png",
+        "Tattoo.png",
+        "Thinking.png",
+        "X.png",
+        "Zombie.png"
+      ],
+      "headwear": [
+        "Abyssal Street Cap.png",
+        "Azure Crest Cap.png",
+        "Bladed Spinner Cap.png",
+        "Blazed Hair.png",
+        "Cowboy Shadow Hat.png",
+        "Crimson Claw Topper.png",
+        "Crimson Fury Mane.png",
+        "Crimson Warrior Headband.png",
+        "Cryptic Jungle X-Cap.png",
+        "Culinary Warlord's Hat.png",
+        "Cursed Origami Hat.png",
+        "Dark Harlequin Hat.png",
+        "Darkforce Beanie.png",
+        "Diner's Champion Cap.png",
+        "Dread Corsair.png",
+        "Eclipse Aurora Ring.png",
+        "Enforcer's Shadow Cap.png",
+        "Feral Cap.png",
+        "Forest Rogue Cap.png",
+        "Inferno Mystic Cap.png",
+        "Inferno Wrath Horns.png",
+        "Jungle Shade Sombrero.png",
+        "Jungle Shade Visor.png",
+        "Jungle Warrior Cap.png",
+        "Monsoon Shadow Protector.png",
+        "Night Prowler Ears.png",
+        "Razor Crest Mohawk.png",
+        "Rotor Jungle Cap.png",
+        "Rugged Jungle Bandana.png",
+        "Shadow XRP Overcap.png",
+        "Shadowed Jungle Fez.png",
+        "Sovereign's Dark Coronet.png",
+        "Spiked Hat Crown.png",
+        "Spirit Band.png",
+        "Storm Surge Bucker Hat.png",
+        "Subdued Sea Cap.png",
+        "Superman.png",
+        "Thorned Shadow Hat.png",
+        "Thorned Victory Halo.png",
+        "Toxic Spiked Peel.png",
+        "Twilight Carnival Cap.png",
+        "Warlord's Combat Helmet.png",
+        "Warrior's Shadow Beret.png"
+      ]
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
