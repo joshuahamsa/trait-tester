@@ -50,26 +50,29 @@ function createElement(tag, props = {}, children = []) {
  */
 async function scanTraitFolder(traitType) {
   try {
-    // Try to fetch the directory listing
+    // Try to fetch the directory listing first (works on some servers)
     const response = await fetch(`traits/${traitType}/`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch directory listing for ${traitType}`);
+    if (response.ok) {
+      const html = await response.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      
+      // Find all links that end with .png
+      const links = Array.from(doc.querySelectorAll('a[href$=".png"]'));
+      const filenames = links.map(link => link.href.split('/').pop());
+      
+      const pngFiles = filenames.filter(filename => filename.endsWith('.png')).sort();
+      if (pngFiles.length > 0) {
+        console.log(`Successfully scanned ${traitType} folder:`, pngFiles);
+        return pngFiles;
+      }
     }
-    
-    const html = await response.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    
-    // Find all links that end with .png
-    const links = Array.from(doc.querySelectorAll('a[href$=".png"]'));
-    const filenames = links.map(link => link.href.split('/').pop());
-    
-    return filenames.filter(filename => filename.endsWith('.png')).sort();
   } catch (error) {
-    console.warn(`Could not scan ${traitType} folder:`, error);
-    // Fallback: try to detect files by testing common names
-    return detectFilesByTesting(traitType);
+    console.warn(`Directory listing failed for ${traitType}, trying file detection...`);
   }
+  
+  // Fallback: try to detect files by testing common names
+  return detectFilesByTesting(traitType);
 }
 
 /**
@@ -81,18 +84,29 @@ async function detectFilesByTesting(traitType) {
   const commonNames = getCommonNamesForTrait(traitType);
   const detectedFiles = [];
   
-  for (const filename of commonNames) {
+  // Test each file by making a HEAD request
+  const testPromises = commonNames.map(async (filename) => {
     try {
-      const response = await fetch(`traits/${traitType}/${filename}`);
+      const response = await fetch(`traits/${traitType}/${filename}`, { method: 'HEAD' });
       if (response.ok) {
-        detectedFiles.push(filename);
+        return filename;
       }
     } catch (error) {
-      // File doesn't exist, continue to next
+      // File doesn't exist or can't be accessed
     }
+    return null;
+  });
+  
+  const results = await Promise.all(testPromises);
+  const validFiles = results.filter(file => file !== null).sort();
+  
+  if (validFiles.length > 0) {
+    console.log(`Detected ${validFiles.length} files in ${traitType} via testing:`, validFiles);
+  } else {
+    console.warn(`No files detected in ${traitType} folder`);
   }
   
-  return detectedFiles.sort();
+  return validFiles;
 }
 
 /**
@@ -128,12 +142,11 @@ function getCommonNamesForTrait(traitType) {
     mouth: [
       "Angry.png", "Happy.png", "Normal.png", "Sad.png", "Smug.png", "Abyssal Shine Grill.png",
       "Apocalyptic Slice.png", "Baynana Puff.png", "Bite Lips.png", "Bite Teeth.png",
-      "Bronzed Decay Bite.png", "Cyber Furnace-Cigar.png", "Inferno Hotdog.png",
-      "Mischief's Binky.png", "No Expression.png", "Nuclear Nogie.png", "Pandemonium Pact Coin.png",
-      "Piano Grill.png", "Prismatic Bite.png", "Rainbow to Prism Jaw  Copy.png",
-      "Raucous Reveler.png", "Ravaged Donut.png", "S.png", "Shard Blade.png",
-      "Sovereign Fang Grill.png", "Thorn-Infused Jungle Gum.png", "Thorned Rose.png",
-      "Timber Fang Grill.png", "Tongue.png", "Yawn.png", "Yelling.png", "Zipper Maw.png"
+      "Bite-Sec Ledger.png", "Bronzed Decay Bite.png", "Cyber Furnace-Cigar.png", "Inferno Hot Dog.png",
+      "Mischief's Binky.png", "No Expression.png", "Nuclear Stogie.png", "Pandemonium Pact Coin.png",
+      "Piano Grill.png", "Prism Jaw.png", "Prismatic Bite.png", "Raucous Reveler.png",
+      "Ravaged Donut.png", "Shard Blade.png", "Sovereign Fang Grill.png", "Standard.png",
+      "Thorned Rose.png", "Timber Fang Grill.png", "Tongue.png", "Yawn.png", "Yelling.png", "Zipper Maw.png"
     ],
     eyes: [
       "Angry.png", "Arrogant.png", "Closed Eyes.png", "Eyes.png", "Happy.png", "Normal.png",
