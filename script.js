@@ -2,7 +2,7 @@
  * script.js
  *
  * This file implements the core logic for the dress up game.  It
- * automatically reads the trait manifest (traits/manifest.json),
+ * automatically scans the traits folders to build the manifest,
  * populates drop‑down menus for each trait layer, and updates the
  * stacked preview when selections change.  The trait ordering is
  * controlled by the TRAIT_ORDER constant.
@@ -44,35 +44,149 @@ function createElement(tag, props = {}, children = []) {
 }
 
 /**
- * Load the trait manifest and build the UI.
+ * Scan a trait folder to find all PNG files
+ * @param {string} traitType - The trait type (e.g., 'skin', 'clothes')
+ * @returns {Promise<Array<string>>} Array of PNG filenames
  */
-async function init() {
-  // First, attempt to read the manifest from the embedded script tag.  This
-  // allows the app to run when opened via the file:// protocol (where
-  // fetching local files is restricted).  If no embedded manifest is
-  // found, fall back to fetching traits/manifest.json via fetch.
-  const embedded = document.getElementById('trait-manifest');
-  if (embedded && embedded.textContent) {
-    try {
-      const manifest = JSON.parse(embedded.textContent);
-      buildUI(manifest);
-      return;
-    } catch (err) {
-      console.error('Failed to parse embedded manifest', err);
-    }
-  }
-  // Fallback: fetch manifest via HTTP (works when served over http)
+async function scanTraitFolder(traitType) {
   try {
-    const res = await fetch(MANIFEST_PATH);
-    if (!res.ok) {
-      throw new Error(`Failed to fetch manifest: ${res.status} ${res.statusText}`);
+    // Try to fetch the directory listing
+    const response = await fetch(`traits/${traitType}/`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch directory listing for ${traitType}`);
     }
-    const manifest = await res.json();
-    buildUI(manifest);
-  } catch (err) {
-    console.error(err);
-    alert('Could not load trait manifest. Please ensure that traits/manifest.json exists and is valid JSON.');
+    
+    const html = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    
+    // Find all links that end with .png
+    const links = Array.from(doc.querySelectorAll('a[href$=".png"]'));
+    const filenames = links.map(link => link.href.split('/').pop());
+    
+    return filenames.filter(filename => filename.endsWith('.png')).sort();
+  } catch (error) {
+    console.warn(`Could not scan ${traitType} folder:`, error);
+    // Fallback: try to detect files by testing common names
+    return detectFilesByTesting(traitType);
   }
+}
+
+/**
+ * Fallback method to detect files by testing for common filenames
+ * @param {string} traitType - The trait type
+ * @returns {Promise<Array<string>>} Array of detected PNG filenames
+ */
+async function detectFilesByTesting(traitType) {
+  const commonNames = getCommonNamesForTrait(traitType);
+  const detectedFiles = [];
+  
+  for (const filename of commonNames) {
+    try {
+      const response = await fetch(`traits/${traitType}/${filename}`);
+      if (response.ok) {
+        detectedFiles.push(filename);
+      }
+    } catch (error) {
+      // File doesn't exist, continue to next
+    }
+  }
+  
+  return detectedFiles.sort();
+}
+
+/**
+ * Get common filenames for each trait type (fallback data)
+ * @param {string} traitType - The trait type
+ * @returns {Array<string>} Array of common filenames for this trait type
+ */
+function getCommonNamesForTrait(traitType) {
+  const commonNames = {
+    skin: [
+      "Default.png", "Abyssal Glow.png", "Ancient Amber.png", "Celestial Alchemy.png",
+      "Celestial Prism.png", "Chromatic Armor.png", "Cosmic Cheetah Fur.png",
+      "Digital Mirage.png", "Dragon's Blood.png", "Enchanted Onyx.png",
+      "Grey Marble.png", "Interstellar Aurora.png", "Lunar Crystaline.png",
+      "Necromancer's Veil.png", "Oblivion Fossil Hide.png", "Obsidian Flame.png",
+      "Phoenix Feathers.png", "Psychedelic Spectrum.png", "Quantum Circuitry.png",
+      "Royal Blossom.png", "Sapphire Frost.png", "Starlit Frost.png", "Tropical Mirage.png"
+    ],
+    clothes: [
+      "Abyssal Harpooner.png", "Abyssal Illusion Tee.png", "Apelink.png",
+      "Apocalyptic Warrior.png", "Baynana Avenger.png", "Boardhide Gear.png",
+      "Cypherlord.png", "Desert Raider.png", "Elite Stealth.png", "Forest Sovereign.png",
+      "Forester's Guard.png", "Gothic Bride.png", "Jungle Sovereign.png", "Midnight Regalia.png",
+      "Night Operative's Gear.png", "Oni Kimono.png", "Outlaw Elite.png", "Outlaw Overlord.png",
+      "Predator s Prize.png", "Rainforest Mosaic.png", "Red Toddler.png", "Sailor.png",
+      "Shadow Weaver's Neckpiece.png", "Shaman's Heirloom.png", "Sovereign's Amulet.png",
+      "Sovereign's Mantle.png", "Spacecuit to Cosmic Conqueror.png", "Stormbringer Jersey.png",
+      "Streetwise Swagger.png", "Tanktop Dark Warrior s Cuirass.png", "Tie Dye to Nebula Core tee.png",
+      "Tribal Warrior.png", "Tropical Overlord Straps.png", "Tropical Rebel.png",
+      "Warlock's Shroud.png", "Warlord's Fur Mantle.png", "Warlord's Robe.png",
+      "Warrior of the Fields.png", "Warrior's Tunic.png", "XRP Cryptowear Hoodie.png"
+    ],
+    mouth: [
+      "Angry.png", "Happy.png", "Normal.png", "Sad.png", "Smug.png", "Abyssal Shine Grill.png",
+      "Apocalyptic Slice.png", "Baynana Puff.png", "Bite Lips.png", "Bite Teeth.png",
+      "Bronzed Decay Bite.png", "Cyber Furnace-Cigar.png", "Inferno Hotdog.png",
+      "Mischief's Binky.png", "No Expression.png", "Nuclear Nogie.png", "Pandemonium Pact Coin.png",
+      "Piano Grill.png", "Prismatic Bite.png", "Rainbow to Prism Jaw  Copy.png",
+      "Raucous Reveler.png", "Ravaged Donut.png", "S.png", "Shard Blade.png",
+      "Sovereign Fang Grill.png", "Thorn-Infused Jungle Gum.png", "Thorned Rose.png",
+      "Timber Fang Grill.png", "Tongue.png", "Yawn.png", "Yelling.png", "Zipper Maw.png"
+    ],
+    eyes: [
+      "Angry.png", "Arrogant.png", "Closed Eyes.png", "Eyes.png", "Happy.png", "Normal.png",
+      "Sad.png", "Scared.png", "Shocked.png", "Shy.png", "Stoned.png", "Thinking.png",
+      "Battle-Scarred Tactical Eyepatch.png", "Broken Optic Glasses.png", "Brokenana Coins.png",
+      "Cooling Fury Lazers.png", "Cyberpunk Visors.png", "Dimensional Spectra Frames.png",
+      "Inferno Heart Eyes.png", "Mystic Veil Vision.png", "Red Lazer.png", "Retro Neon Eclipse.png",
+      "Scar.png", "Shutter.png", "Tattoo.png", "X.png", "Zombie.png"
+    ],
+    headwear: [
+      "Abyssal Street Cap.png", "Azure Crest Cap.png", "Bladed Spinner Cap.png", "Blazed Hair.png",
+      "Cowboy Shadow Hat.png", "Crimson Claw Topper.png", "Crimson Fury Mane.png",
+      "Crimson Warrior Headband.png", "Cryptic Jungle X-Cap.png", "Culinary Warlord's Hat.png",
+      "Cursed Origami Hat.png", "Dark Harlequin Hat.png", "Darkforce Beanie.png",
+      "Diner's Champion Cap.png", "Dread Corsair.png", "Eclipse Aurora Ring.png",
+      "Enforcer's Shadow Cap.png", "Feral Cap.png", "Forest Rogue Cap.png", "Inferno Mystic Cap.png",
+      "Inferno Wrath Horns.png", "Jungle Shade Sombrero.png", "Jungle Shade Visor.png",
+      "Jungle Warrior Cap.png", "Monsoon Shadow Protector.png", "Night Prowler Ears.png",
+      "Razor Crest Mohawk.png", "Rotor Jungle Cap.png", "Rugged Jungle Bandana.png",
+      "Shadow XRP Overcap.png", "Shadowed Jungle Fez.png", "Sovereign's Dark Coronet.png",
+      "Spiked Hat Crown.png", "Spirit Band.png", "Storm Surge Bucker Hat.png", "Subdued Sea Cap.png",
+      "Superman.png", "Thorned Shadow Hat.png", "Thorned Victory Halo.png", "Toxic Spiked Peel.png",
+      "Twilight Carnival Cap.png", "Warlord's Combat Helmet.png", "Warrior's Shadow Beret.png"
+    ]
+  };
+  
+  return commonNames[traitType] || [];
+}
+
+/**
+ * Build manifest by scanning trait folders
+ * @returns {Promise<Object>} Manifest object
+ */
+async function buildManifestFromFolders() {
+  const manifest = {};
+  
+  for (const traitType of TRAIT_ORDER) {
+    try {
+      const files = await scanTraitFolder(traitType);
+      if (files.length > 0) {
+        manifest[traitType] = files;
+        console.log(`Found ${files.length} files in ${traitType}:`, files);
+      } else {
+        console.warn(`No files found in ${traitType} folder`);
+        manifest[traitType] = [];
+      }
+    } catch (error) {
+      console.error(`Error scanning ${traitType} folder:`, error);
+      manifest[traitType] = [];
+    }
+  }
+  
+  return manifest;
 }
 
 /**
@@ -151,36 +265,85 @@ function updateTrait(trait, filename) {
  * Generate a random trait set by randomly selecting one trait from each category.
  */
 function randomizeTraits() {
-  // Get the manifest data from the embedded script tag
-  const embedded = document.getElementById('trait-manifest');
-  if (!embedded || !embedded.textContent) {
-    console.error('No trait manifest found');
-    return;
-  }
-
-  try {
-    const manifest = JSON.parse(embedded.textContent);
-    
-    // For each trait category, randomly select one option
-    TRAIT_ORDER.forEach(trait => {
-      const options = manifest[trait] || [];
-      if (options.length > 0) {
-        // Select a random trait from the available options
-        const randomIndex = Math.floor(Math.random() * options.length);
-        const randomTrait = options[randomIndex];
-        
-        // Update the dropdown selection
-        const selectEl = document.getElementById(`select-${trait}`);
-        if (selectEl) {
-          selectEl.value = randomTrait;
-        }
-        
-        // Update the preview
-        updateTrait(trait, randomTrait);
+  // Get the current manifest data from the dropdowns
+  const manifest = {};
+  
+  TRAIT_ORDER.forEach(trait => {
+    const selectEl = document.getElementById(`select-${trait}`);
+    if (selectEl) {
+      const options = Array.from(selectEl.options).map(option => option.value);
+      manifest[trait] = options.filter(option => option); // Filter out empty values
+    }
+  });
+  
+  // For each trait category, randomly select one option
+  TRAIT_ORDER.forEach(trait => {
+    const options = manifest[trait] || [];
+    if (options.length > 0) {
+      // Select a random trait from the available options
+      const randomIndex = Math.floor(Math.random() * options.length);
+      const randomTrait = options[randomIndex];
+      
+      // Update the dropdown selection
+      const selectEl = document.getElementById(`select-${trait}`);
+      if (selectEl) {
+        selectEl.value = randomTrait;
       }
-    });
-  } catch (err) {
-    console.error('Failed to randomize traits:', err);
+      
+      // Update the preview
+      updateTrait(trait, randomTrait);
+    }
+  });
+}
+
+/**
+ * Load the trait manifest and build the UI.
+ */
+async function init() {
+  try {
+    // First, try to build manifest by scanning folders
+    console.log('Scanning trait folders to build manifest...');
+    const manifest = await buildManifestFromFolders();
+    
+    // Check if we got any data from scanning
+    const hasData = Object.values(manifest).some(files => files.length > 0);
+    
+    if (!hasData) {
+      // Fallback to embedded manifest
+      const embedded = document.getElementById('trait-manifest');
+      if (embedded && embedded.textContent) {
+        try {
+          const embeddedManifest = JSON.parse(embedded.textContent);
+          console.log('Using embedded manifest as fallback');
+          buildUI(embeddedManifest);
+          return;
+        } catch (err) {
+          console.error('Failed to parse embedded manifest', err);
+        }
+      }
+      
+      // Final fallback: fetch manifest via HTTP
+      try {
+        const res = await fetch(MANIFEST_PATH);
+        if (!res.ok) {
+          throw new Error(`Failed to fetch manifest: ${res.status} ${res.statusText}`);
+        }
+        const fetchedManifest = await res.json();
+        console.log('Using fetched manifest as fallback');
+        buildUI(fetchedManifest);
+        return;
+      } catch (err) {
+        console.error('Failed to fetch manifest:', err);
+      }
+    }
+    
+    // Use the scanned manifest
+    console.log('Using scanned manifest:', manifest);
+    buildUI(manifest);
+    
+  } catch (error) {
+    console.error('Error in init:', error);
+    alert('Could not load trait manifest. Please ensure that trait folders exist and contain PNG files.');
   }
 }
 
