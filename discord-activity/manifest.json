@@ -1,0 +1,38 @@
+{
+  "name": "Ravager Trait Tester",
+  "version": "1.0.0",
+  "description": "A Discord activity for testing Ravager NFT trait combinations",
+  "author": "Your Team",
+  "license": "MIT",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "build": "echo 'No build step required for static site'"
+  },
+  "discord": {
+    "activity": {
+      "name": "Ravager Trait Tester",
+      "type": "ACTIVITY",
+      "description": "Test and preview trait combinations for Ravager NFTs",
+      "supported_platforms": ["desktop"],
+      "supported_locales": ["en-US"],
+              "launch_url": "https://joshuahamsa.github.io/trait-tester/",
+      "activity_party": {
+        "id": "ravager-trait-tester",
+        "size": [1, 1]
+      },
+      "assets": {
+        "large_image": "https://yourusername.github.io/dressup-game/assets/large-image.png",
+        "large_text": "Ravager Trait Tester",
+        "small_image": "https://yourusername.github.io/dressup-game/assets/small-image.png",
+        "small_text": "Testing traits"
+      }
+    }
+  },
+  "permissions": [
+    "ACTIVITY_READ",
+    "ACTIVITY_WRITE"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}

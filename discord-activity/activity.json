@@ -1,0 +1,24 @@
+{
+  "name": "Ravager Trait Tester",
+  "type": "ACTIVITY",
+  "description": "Test and preview trait combinations for Ravager NFTs",
+  "application_id": "1374886773481803867",
+  "supported_platforms": ["desktop"],
+  "supported_locales": ["en-US"],
+  "launch_url": "https://joshuahamsa.com/trait-tester/",
+  "activity_party": {
+    "id": "ravager-trait-tester",
+    "size": [1, 1]
+  },
+  "assets": {
+    "large_image": "https://joshuahamsa.com/trait-tester/discord-activity/assets/large-image.png",
+    "large_text": "Ravager Trait Tester",
+    "small_image": "https://joshuahamsa.com/trait-tester/discord-activity/assets/small-image.png",
+    "small_text": "Testing traits"
+  },
+  "timestamps": {
+    "start": null
+  },
+  "state": "Browsing traits",
+  "details": "Testing trait combinations"
+}
