@@ -40,9 +40,9 @@ class DiscordActivityManager {
           size: [1, 1]
         },
         assets: {
-          large_image: 'https://joshuahamsa.com/trait-tester/assets/large-image.png',
+          large_image: 'https://joshuahamsa.com/trait-tester/discord-activity/assets/large-image.png',
           large_text: 'Ravager Trait Tester',
-          small_image: 'https://joshuahamsa.com/trait-tester/assets/small-image.png',
+          small_image: 'https://joshuahamsa.com/trait-tester/discord-activity/assets/small-image.png',
           small_text: 'Testing traits'
         }
       });
@@ -84,9 +84,9 @@ class DiscordActivityManager {
           start: this.startTime
         },
         assets: {
-          large_image: 'https://joshuahamsa.com/trait-tester/assets/large-image.png',
+          large_image: 'https://joshuahamsa.com/trait-tester/discord-activity/assets/large-image.png',
           large_text: 'Ravager Trait Tester',
-          small_image: 'https://joshuahamsa.com/trait-tester/assets/small-image.png',
+          small_image: 'https://joshuahamsa.com/trait-tester/discord-activity/assets/small-image.png',
           small_text: state
         }
       });
@@ -96,163 +96,78 @@ class DiscordActivityManager {
   }
 
   setupTraitListeners() {
-    // Listen for trait changes from the main script
+    // Wait for the main script to initialize
+    const checkInit = () => {
+      if (typeof window.updateTrait === 'function') {
+        this.hookIntoTraitUpdates();
+      } else {
+        setTimeout(checkInit, 100);
+      }
+    };
+    checkInit();
+  }
+
+  hookIntoTraitUpdates() {
+    // Store the original updateTrait function
     const originalUpdateTrait = window.updateTrait;
+    
+    // Override the updateTrait function to track changes
     window.updateTrait = (trait, filename) => {
       // Call the original function
-      if (originalUpdateTrait) {
-        originalUpdateTrait(trait, filename);
-      }
+      originalUpdateTrait(trait, filename);
       
-      // Update Discord activity
+      // Update our tracking
       this.currentTraits[trait] = filename;
-      this.updateActivityFromTraits();
-    };
-
-    // Listen for randomization
-    const originalRandomizeTraits = window.randomizeTraits;
-    window.randomizeTraits = () => {
-      // Call the original function
-      if (originalRandomizeTraits) {
-        originalRandomizeTraits();
-      }
       
       // Update Discord activity
-      setTimeout(() => {
-        this.updateActivityFromTraits();
-        this.updateActivityState('Randomized traits', 'Generated new combination');
-      }, 100);
+      this.updateTraitActivity();
     };
+
+    // Also hook into the randomize function
+    const originalRandomizeTraits = window.randomizeTraits;
+    if (originalRandomizeTraits) {
+      window.randomizeTraits = () => {
+        originalRandomizeTraits();
+        this.updateActivityState('Randomizing traits', 'Generating random combinations');
+      };
+    }
   }
 
-  updateActivityFromTraits() {
-    if (!this.isConnected) return;
+  updateTraitActivity() {
+    // Count how many traits are selected
+    const selectedTraits = Object.values(this.currentTraits).filter(trait => trait && trait !== '');
+    const totalTraits = Object.keys(this.currentTraits).length;
+    
+    if (selectedTraits.length === 0) {
+      this.updateActivityState('Browsing traits', 'Selecting trait combinations');
+    } else if (selectedTraits.length === totalTraits) {
+      this.updateActivityState('Complete combination', `${selectedTraits.length} traits selected`);
+    } else {
+      this.updateActivityState('Building combination', `${selectedTraits.length}/${totalTraits} traits selected`);
+    }
+  }
 
-    const traitCount = Object.keys(this.currentTraits).length;
-    const activeTraits = Object.values(this.currentTraits).filter(trait => trait).length;
-    
-    let state = 'Browsing traits';
-    let details = `Testing trait combinations (${activeTraits}/${traitCount} selected)`;
-    
-    // Create more specific state based on current traits
-    if (activeTraits > 0) {
-      const traitNames = Object.entries(this.currentTraits)
-        .filter(([_, value]) => value)
-        .map(([category, filename]) => {
-          const name = filename.replace(/\.png$/i, '').replace(/[_-]/g, ' ');
-          return `${category}: ${name}`;
-        })
-        .slice(0, 2); // Show first 2 traits
-      
-      if (traitNames.length > 0) {
-        state = traitNames.join(', ');
-        if (activeTraits > 2) {
-          state += ` +${activeTraits - 2} more`;
-        }
+  getCurrentTraitSummary() {
+    const summary = [];
+    Object.entries(this.currentTraits).forEach(([trait, filename]) => {
+      if (filename) {
+        const traitName = filename.replace('.png', '').replace(/^[A-Z]+ /, '');
+        summary.push(`${trait}: ${traitName}`);
       }
-    }
-
-    this.updateActivityState(state, details);
-  }
-
-  // Method to share current combination
-  async shareCombination() {
-    if (!this.isConnected) {
-      alert('Discord not connected. Combination copied to clipboard instead.');
-      this.copyCombinationToClipboard();
-      return;
-    }
-
-    try {
-      const combination = this.getCurrentCombination();
-      await this.activity.share({
-        title: 'Ravager Trait Combination',
-        text: `Check out this Ravager trait combination: ${combination}`,
-        url: window.location.href
-      });
-    } catch (error) {
-      console.error('Failed to share combination:', error);
-      this.copyCombinationToClipboard();
-    }
-  }
-
-  getCurrentCombination() {
-    const traits = Object.entries(this.currentTraits)
-      .filter(([_, value]) => value)
-      .map(([category, filename]) => {
-        const name = filename.replace(/\.png$/i, '').replace(/[_-]/g, ' ');
-        return `${category}: ${name}`;
-      });
-    
-    return traits.join(' | ');
-  }
-
-  copyCombinationToClipboard() {
-    const combination = this.getCurrentCombination();
-    navigator.clipboard.writeText(combination).then(() => {
-      this.updateStatus('Combination copied to clipboard!');
-      setTimeout(() => {
-        this.updateStatus('Connected to Discord');
-      }, 2000);
     });
-  }
-
-  // Cleanup method
-  disconnect() {
-    if (this.activity && this.isConnected) {
-      this.activity.disconnect();
-      this.isConnected = false;
-      this.updateStatus('Disconnected from Discord');
-    }
+    return summary.join(', ');
   }
 }
 
-// Initialize Discord Activity when the page loads
-let discordManager = null;
-
+// Initialize Discord Activity Manager when the page loads
 document.addEventListener('DOMContentLoaded', () => {
-  // Wait for the main script to initialize first
+  // Wait a bit for the main script to load
   setTimeout(() => {
-    discordManager = new DiscordActivityManager();
-  }, 1000);
+    window.discordActivityManager = new DiscordActivityManager();
+  }, 500);
 });
 
-// Cleanup on page unload
-window.addEventListener('beforeunload', () => {
-  if (discordManager) {
-    discordManager.disconnect();
-  }
-});
-
-// Add share button to the UI
-function addShareButton() {
-  const randomizeContainer = document.getElementById('randomize-container');
-  if (randomizeContainer && !document.getElementById('share-btn')) {
-    const shareBtn = document.createElement('button');
-    shareBtn.id = 'share-btn';
-    shareBtn.innerHTML = '📤 Share Combination';
-    shareBtn.style.cssText = `
-      background: linear-gradient(45deg, #57f287, #3ba55c);
-      border: none;
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(87, 242, 135, 0.3);
-      margin-left: 1rem;
-    `;
-    
-    shareBtn.addEventListener('click', () => {
-      if (discordManager) {
-        discordManager.shareCombination();
-      }
-    });
-    
-    randomizeContainer.appendChild(shareBtn);
-  }
+// Export for potential external use
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = DiscordActivityManager;
 }
-
-// Add share button after a short delay
-setTimeout(addShareButton, 2000);
