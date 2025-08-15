@@ -51,17 +51,37 @@
       backdrop-filter: blur(10px);
     }
     
+    .control-group label {
+      color: white;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    
     select {
-      background: rgba(0, 0, 0, 0.3);
+      background: #2c2f33;
       color: white;
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 4px;
       padding: 0.5rem;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+    
+    select:focus {
+      outline: none;
+      border-color: #5865f2;
+      box-shadow: 0 0 0 2px rgba(88, 101, 242, 0.3);
     }
     
     select option {
       background: #2c2f33;
       color: white;
+      padding: 0.5rem;
+    }
+    
+    select option:hover {
+      background: #5865f2;
     }
     
     #randomize-btn {
