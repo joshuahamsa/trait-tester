@@ -96,10 +96,13 @@ class DiscordActivityManager {
   }
 
   setupTraitListeners() {
-    // Wait for the main script to initialize
+    // Wait for the main script to fully initialize
     const checkInit = () => {
-      if (typeof window.updateTrait === 'function') {
-        this.hookIntoTraitUpdates();
+      if (typeof window.updateTrait === 'function' && typeof window.randomizeTraits === 'function') {
+        // Wait a bit more to ensure initial traits are set
+        setTimeout(() => {
+          this.hookIntoTraitUpdates();
+        }, 100);
       } else {
         setTimeout(checkInit, 100);
       }
@@ -131,6 +134,26 @@ class DiscordActivityManager {
         this.updateActivityState('Randomizing traits', 'Generating random combinations');
       };
     }
+
+    // Initialize current traits from existing selections
+    this.initializeCurrentTraits();
+  }
+
+  initializeCurrentTraits() {
+    // Get current trait selections from the UI
+    const controlsContainer = document.getElementById('controls');
+    if (controlsContainer) {
+      const selectElements = controlsContainer.querySelectorAll('select[id^="select-"]');
+      selectElements.forEach(select => {
+        const traitType = select.id.replace('select-', '');
+        if (select.value) {
+          this.currentTraits[traitType] = select.value;
+        }
+      });
+    }
+    
+    // Update Discord activity with current state
+    this.updateTraitActivity();
   }
 
   updateTraitActivity() {
@@ -161,10 +184,10 @@ class DiscordActivityManager {
 
 // Initialize Discord Activity Manager when the page loads
 document.addEventListener('DOMContentLoaded', () => {
-  // Wait a bit for the main script to load
+  // Wait longer for the main script to fully load and initialize
   setTimeout(() => {
     window.discordActivityManager = new DiscordActivityManager();
-  }, 500);
+  }, 1000);
 });
 
 // Export for potential external use
