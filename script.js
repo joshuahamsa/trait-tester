@@ -11,7 +11,7 @@
 
 // Define the layering order from bottom to top. This will be automatically
 // updated by the update_manifest.py script to include all detected folders.
-const TRAIT_ORDER = ["Skin", "Spine", "Clothes", "Mouth", "Headwear", "Tusk", "Eyes"];
+const TRAIT_ORDER = ["Skin", "Spine", "Clothes", "Mouth", "Tusk", "Eyes", "Headwear"];
 
 /**
  * Create a DOM element with given tag, properties and children.
