@@ -120,3 +120,14 @@ OGtraits/
 .mypy_cache/
 zArchive/
 traits/
+ravagerslogo.png
+ravagerslogo128.png
+ravagerslogo512.png
+ravagerslogo1024.png
+separate_tusks.py
+serve_images.py
+tusk_linker.js
+update_script_manifest.py
+update_urls.py
+upload_to_bunny.py
+ravagerslogo512/
