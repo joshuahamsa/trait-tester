@@ -1,0 +1,190 @@
+=== POTENTIAL TRAIT MATCHES ===
+
+These traits have high similarity scores and might be the same:
+
+Type: Skin
+CSV: HOG Abyssal Viper Snakes
+Script: HOG Abyssal Viper Scales
+Score: 0.92
+Original: Snake
+--------------------------------------------------
+Type: Skin
+CSV: HOG Lava 
+Script: HOG Lava
+Score: 0.94
+Original: Lava
+--------------------------------------------------
+Type: Skin
+CSV: HOG Obsidianfin Tigershadow
+Script: HOG Obsidian Tigershadow
+Score: 0.94
+Original: Tigershark
+--------------------------------------------------
+Type: Skin
+CSV: HOG Cybershadow 
+Script: HOG Cybershadow
+Score: 0.97
+Original: Cyborg
+--------------------------------------------------
+Type: Skin
+CSV: HOG Junglesworn Scar
+Script: HOG Jungleworn Scar
+Score: 0.97
+Original: Orange
+--------------------------------------------------
+Type: Skin
+CSV: HOG Obsidian Azure Spikes
+Script: HOG Azure Spikes
+Score: 0.78
+Original: Blue
+--------------------------------------------------
+Type: Clothes
+CSV: APE Predator's Prize
+Script: APE Predator s Prize
+Score: 0.95
+Original: Ripped Tee
+--------------------------------------------------
+Type: Mouth
+CSV: APE Nuclear Nogie
+Script: APE Nuclear Stogie
+Score: 0.91
+Original: Cigarette
+--------------------------------------------------
+Type: Mouth
+CSV: APE Inferno Hotdog
+Script: APE Inferno Hot Dog
+Score: 0.97
+Original: Hotdog
+--------------------------------------------------
+Type: Mouth
+CSV: APE S
+Script: APE Sad
+Score: 0.83
+Original: S
+--------------------------------------------------
+Type: Mouth
+CSV: HOG Closed H
+Script: HOG Close
+Score: 0.86
+Original: Closed
+--------------------------------------------------
+Type: Mouth
+CSV: HOG Angry H
+Script: HOG angry
+Score: 0.90
+Original: Angry
+--------------------------------------------------
+Type: Mouth
+CSV: HOG Zombie H
+Script: HOG Zombie
+Score: 0.91
+Original: Zombie
+--------------------------------------------------
+Type: Mouth
+CSV: HOG Sad H
+Script: HOG Sad
+Score: 0.88
+Original: Sad
+--------------------------------------------------
+Type: Mouth
+CSV: HOG Grin H
+Script: HOG Grin
+Score: 0.89
+Original: Grin
+--------------------------------------------------
+Type: Mouth
+CSV: HOG Stitch H
+Script: HOG Stitch
+Score: 0.91
+Original: Stitch
+--------------------------------------------------
+Type: Mouth
+CSV: HOG Tongue H
+Script: HOG Tongue
+Score: 0.91
+Original: Tongue
+--------------------------------------------------
+Type: Eyes
+CSV: HOG Blue eye
+Script: HOG Blue Eye
+Score: 1.00
+Original: Blue eye
+--------------------------------------------------
+Type: Eyes
+CSV: HOG Happy H
+Script: HOG Shy H
+Score: 0.80
+Original: Happy
+--------------------------------------------------
+Type: Eyes
+CSV: HOG Duskraven Sentinel
+Script: HOG Bird Duskraven Sentinel
+Score: 0.90
+Original: Bird
+--------------------------------------------------
+Type: Eyes
+CSV: HOG Shocked 
+Script: HOG Shocked
+Score: 0.96
+Original: 3D Eyes
+--------------------------------------------------
+Type: Eyes
+CSV: HOG Red laser H
+Script: HOG Red Laser H
+Score: 1.00
+Original: Red laser
+--------------------------------------------------
+Type: Headwear
+CSV: HOG Backwards Bloodshade Raider Cap
+Script: HOG Bloodshade Raider Cap
+Score: 0.83
+Original: Backwards Cap
+--------------------------------------------------
+Type: Headwear
+CSV: HOG Duskrider Woven Hat 2
+Script: HOG Duskrider Woven Hat
+Score: 0.96
+Original: Strawhat 2
+--------------------------------------------------
+Type: Headwear
+CSV: HOG Hog Enforcer Cap?
+Script: HOG Enforcer Cap
+Score: 0.97
+Original: Police
+--------------------------------------------------
+Type: Headwear
+CSV: HOG Shadowspire Beret
+Script: HOG Shadowcrest Nest
+Score: 0.73
+Original: Beret
+--------------------------------------------------
+Type: Clothing
+CSV: HOG Obsidiansteel Shadowplate
+Script: HOG Obsidian Shadow Jacket
+Score: 0.76
+Original: Futuristic
+--------------------------------------------------
+Type: Clothing
+CSV: HOG Shadowline Veilshirt
+Script: HOG Striped Shadowline Veilshirt
+Score: 0.86
+Original: Striped
+--------------------------------------------------
+Type: Clothing
+CSV: HOG Nirvana Embrace
+Script: HOG NIrvana Embrace
+Score: 1.00
+Original: Nirvana
+--------------------------------------------------
+Type: Clothing
+CSV: HOG Shadow Ronin Vanguard
+Script: HOG Shadow XRP Vanguard Tee
+Score: 0.81
+Original: Samurai
+--------------------------------------------------
+Type: Tusk
+CSV: HOG Silver Tusks
+Script: HOG Spineforge Tusks
+Score: 0.78
+Original: Silver Tusk
+--------------------------------------------------

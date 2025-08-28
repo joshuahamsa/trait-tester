@@ -53,7 +53,7 @@ Clothes,Pirate,Dread Captain's Regalia,APE Dread Captain's Regalia
 Clothes,Police,Riot Commander,APE Riot Commander
 Clothes,Prison,Escape Artist's Mark,APE Escape Artist's Mark
 Clothes,Restrain,Speculator's Shackle,APE Speculator's Shackle
-Clothes,Ripped Tee,Predator's Prize,APE Predator's Prize
+Clothes,Ripped Tee,Predator's Prize,APE Predator s Prize
 Clothes,Robe,Warlord's Robe,APE Warlord's Robe
 Clothes,Robin,Forest Sovereign,APE Forest Sovereign
 Clothes,Sailor,Admiral of the Abyss,APE Admiral of the Abyss
@@ -75,7 +75,7 @@ Mouth,Bite Lips,Bite Lips,APE Bite Lips
 Mouth,Bite Teeth,Bite Teeth,APE Bite Teeth
 Mouth,Bubble,Thorn-Infused Jungle Gum,APE Thorn-Infused Jungle Gum
 Mouth,Cigar,Cyber Furnace-Cigar,APE Cyber Furnace-Cigar
-Mouth,Cigarette,Nuclear Nogie,APE Nuclear Nogie
+Mouth,Cigarette,Nuclear Nogie,APE Nuclear Stogie
 Mouth,Coin,Pandemonium Pact Coin,APE Pandemonium Pact Coin
 Mouth,Dagger,Shard Blade,APE Shard Blade
 Mouth,Diamond Grill,Abyssal Shine Grill,APE Abyssal Shine Grill
@@ -174,19 +174,19 @@ Headwear,Viking,Jungle Warrior Cap,APE Jungle Warrior Cap
 Headwear,Visor,Jungle Shade Visor,APE Jungle Shade Visor
 Headwear,Wizard Hat,Feral Cap,APE Feral Cap
 Headwear,XRP Cap,Cryptic Jungle X-Cap,APE Cryptic Jungle X-Cap
-Skin,Snake,Abyssal Viper Snakes,HOG Abyssal Viper Snakes
+Skin,Snake,Abyssal Viper Snakes,HOG Abyssal Viper Scales
 Skin,Panda,Eclipse Orb Canvas,HOG Eclipse Orb Canvas
 Skin,Slimey,Verdant Flux Dermis,HOG Verdant Flux Dermis
-Skin,Lava,Lava ,HOG Lava 
+Skin,Lava,Lava ,HOG Lava
 Skin,Normal,Normal,HOG Normal
 Skin,Zebra,Onyxhide Stripes,HOG Onyxhide Stripes
 Skin,Giraffe,Shadowhide Giraffe,HOG Shadowhide Giraffe
 Skin,Rhino,Titanhide,HOG Titanhide
 Skin,Black,Fire from Apes,HOG Fire from Apes
 Skin,Camo,Shadowstrike Commando,HOG Shadowstrike Commando
-Skin,Tigershark,Obsidianfin Tigershadow,HOG Obsidianfin Tigershadow
-Skin,Cyborg,Cybershadow ,HOG Cybershadow 
-Skin,Orange,Junglesworn Scar,HOG Junglesworn Scar
+Skin,Tigershark,Obsidianfin Tigershadow,HOG Obsidian Tigershadow
+Skin,Cyborg,Cybershadow ,HOG Cybershadow
+Skin,Orange,Junglesworn Scar,HOG Jungleworn Scar
 Skin,Diamond,Abyssal Diamondglow,HOG Abyssal Diamondglow
 Skin,Snowleopard,Frostshadow Leopard,HOG Frostshadow Leopard
 Skin,White,Luminarctic Frostweave,HOG Luminarctic Frostweave
@@ -264,7 +264,7 @@ Eyes,Bird,Duskraven Sentinel,HOG Duskraven Sentinel
 Eyes,Coins,Coins H,HOG Coins H
 Eyes,Highwayman Mask,Veil of Ashrift,HOG Veil of Ashrift
 Eyes,XX,XX H,HOG XX H
-Eyes,3D Eyes,Shocked ,HOG Shocked 
+Eyes,3D Eyes,Shocked ,HOG Shocked
 Eyes,High,High H,HOG High H
 Eyes,Green,Venomshade,HOG Venomshade
 Eyes,Heart,Bloodthorn,HOG Bloodthorn
@@ -276,7 +276,7 @@ Eyes,Red laser,Red laser H,HOG Red laser H
 Eyes,Thuglife,Thug Shadow,HOG Thug Shadow
 Eyes,Blue laser,Blue Laser H,HOG Blue Laser H
 Headwear,Backwards Cap,Backwards Bloodshade Raider Cap,HOG Backwards Bloodshade Raider Cap
-Headwear,Strawhat 2,Duskrider Woven Hat 2,HOG Duskrider Woven Hat 2
+Headwear,Strawhat 2,Duskrider Woven Hat 2,HOG Duskrider Woven Hat
 Headwear,Viking,Sunrift Warhelm,HOG Sunrift Warhelm
 Headwear,Chinese Hat,Obsidian Fang War Hat,HOG Obsidian Fang War Hat
 Headwear,None,None,HOG None
@@ -306,18 +306,18 @@ Headwear,Crown,Thornforged Crown,HOG Thornforged Crown
 Headwear,Banana,Baynana Huskhelm,HOG Baynana Huskhelm
 Headwear,Indian Hat,Toxveil Turban,HOG Toxveil Turban
 Headwear,Antler,Ashrack Antlers,HOG Ashrack Antlers
-Headwear,Police,Hog Enforcer Cap?,HOG Hog Enforcer Cap?
+Headwear,Police,Hog Enforcer Cap?,HOG Enforcer Cap
 Headwear,Beret,Shadowspire Beret,HOG Shadowspire Beret
 Headwear,Nightvision,Gravelight Optics,HOG Gravelight Optics
 Mouth,Closed,Closed H,HOG Closed H
 Mouth,Pizza,Infernapep Slice,HOG Infernapep Slice
 Mouth,Angry,Angry H,HOG Angry H
 Mouth,Dynamite,Blazestick,HOG Blazestick
-Mouth,Zombie,Zombie H,HOG Zombie H
+Mouth,Zombie,Zombie H,HOG Zombie
 Mouth,Sad,Sad H,HOG Sad H
 Mouth,Grin,Grin H,HOG Grin H
 Mouth,Rotten,Rotten,HOG Rotten
-Mouth,Stitch,Stitch H,HOG Stitch H
+Mouth,Stitch,Stitch H,HOG Stitch
 Mouth,Dagger,Emberfang Dagger,HOG Emberfang Dagger
 Mouth,Big Cigarette,Smofang Emberroll,HOG Smofang Emberroll
 Mouth,Cigar,Blightwrap Cinderroll,HOG Blightwrap Cinderroll
@@ -329,7 +329,7 @@ Mouth,Long Beard,Long Beard,HOG Long Beard
 Mouth,Gold Pipe,Sunfang Pipe,HOG Sunfang Pipe
 Mouth,Diamond Pipe,Shardsmoke Scepter,HOG Shardsmoke Scepter
 Mouth,Rainbow Doodle,Oblivion Rainbow,HOG Oblivion Rainbow
-Mouth,Tongue,Tongue H,HOG Tongue H
+Mouth,Tongue,Tongue H,HOG Tongue
 Mouth,Xumm,Xumm,HOG Xumm
 Mouth,Cigarette,Ashvein Stick,HOG Ashvein Stick
 Mouth,Diamond Teeth,Shatterbite Grille,HOG Shatterbite Grille
