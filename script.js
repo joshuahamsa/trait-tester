@@ -13,6 +13,41 @@
 // updated by the update_manifest.py script to include all detected folders.
 const TRAIT_ORDER = ["Skin", "Spine", "Clothes", "Mouth", "Tusk", "Eyes", "Headwear"];
 
+// Global variable to store the trait mapping
+let traitMapping = {};
+
+/**
+ * Load the JSON data and create a mapping from new trait names to original trait names
+ */
+async function loadTraitMapping() {
+  try {
+    const response = await fetch('trait_mapping.json');
+    const mappingData = await response.json();
+    
+    // Copy the mapping data to our global variable
+    traitMapping = mappingData;
+    
+    console.log('Loaded trait mapping with', Object.keys(traitMapping).length, 'entries');
+  } catch (error) {
+    console.error('Error loading trait mapping:', error);
+  }
+}
+
+/**
+ * Get the original trait name for a given new trait name
+ */
+function getOriginalTraitName(newTraitName) {
+  // Remove .png extension if present
+  const cleanName = newTraitName.replace(/\.png$/i, '');
+  
+  if (traitMapping[cleanName]) {
+    return traitMapping[cleanName].original;
+  }
+  
+  // If not found, return the new name
+  return cleanName;
+}
+
 /**
  * Create a DOM element with given tag, properties and children.
  * Simple helper to reduce repetition when building the UI.
@@ -232,7 +267,7 @@ function getTraitManifest() {
     "HOG Rotten.png",
     "HOG Sad.png",
     "HOG Stitch.png",
-    "Hog Tongue.png",
+    "HOG Tongue.png",
     "HOG Xumm.png",
     "HOG Zombie.png"
   ],
@@ -444,13 +479,23 @@ function buildUI(manifest) {
         return createElement('option', { value: filename }, [document.createTextNode(label)]);
       })
     ]);
+    
     // Create label for the select
     const labelEl = createElement('label', { htmlFor: `select-${trait}` }, [
       document.createTextNode(trait.charAt(0).toUpperCase() + trait.slice(1))
     ]);
+    
+    // Create original trait name display
+    const originalNameEl = createElement('div', { 
+      id: `original-${trait}`,
+      className: 'original-trait-name',
+      style: 'font-size: 0.8em; color: #666; margin-top: 2px; font-style: italic; text-align: center;'
+    }, [document.createTextNode('')]);
+    
     // Wrap them in a div
-    const group = createElement('div', { className: 'control-group' }, [labelEl, selectEl]);
+    const group = createElement('div', { className: 'control-group' }, [labelEl, selectEl, originalNameEl]);
     controlsContainer.appendChild(group);
+    
     // Initialize the selection to the first option, if available
     if (options.length > 0) {
       updateTrait(trait, options[0]);
@@ -474,6 +519,13 @@ function updateTrait(trait, filename) {
   }
   img.src = `https://baysed.b-cdn.net/traits/${trait}/${filename}`;
   img.style.display = 'block';
+  
+  // Update the original trait name display
+  const originalNameEl = document.getElementById(`original-${trait}`);
+  if (originalNameEl) {
+    const originalName = getOriginalTraitName(filename);
+    originalNameEl.textContent = originalName;
+  }
 }
 
 /**
@@ -525,9 +577,12 @@ function randomizeTraits() {
 /**
  * Load the trait manifest and build the UI.
  */
-function init() {
+async function init() {
   console.log('Initializing application...');
   try {
+    // Load the trait mapping first
+    await loadTraitMapping();
+    
     // Get the trait manifest from embedded data
     const manifest = getTraitManifest();
     console.log('Got manifest:', manifest ? 'yes' : 'no');
@@ -547,8 +602,8 @@ function init() {
 }
 
 // When the document is ready, initialise the application
-document.addEventListener('DOMContentLoaded', () => {
-  init();
+document.addEventListener('DOMContentLoaded', async () => {
+  await init();
   
   // Add event listener for the randomize button
   const randomizeBtn = document.getElementById('randomize-btn');
