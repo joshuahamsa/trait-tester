@@ -17,29 +17,1381 @@ const TRAIT_ORDER = ["Skin", "Spine", "Clothes", "Mouth", "Tusk", "Eyes", "Headw
 let traitMapping = {};
 
 /**
- * Load the JSON data and create a mapping from new trait names to original trait names
+ * Initialize the trait mapping with embedded data
  */
-async function loadTraitMapping() {
-  try {
-    console.log('Starting to load trait mapping...');
-    const response = await fetch('trait_mapping.json');
-    console.log('Fetch response status:', response.status);
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
-    const mappingData = await response.json();
-    console.log('JSON parsed successfully');
-    
-    // Copy the mapping data to our global variable
-    traitMapping = mappingData;
-    
-    console.log('Loaded trait mapping with', Object.keys(traitMapping).length, 'entries');
-  } catch (error) {
-    console.error('Error loading trait mapping:', error);
+function loadTraitMapping() {
+  // Trait mapping data - auto-generated from CSV
+  traitMapping = {
+  "APE Cosmic Cheetah Fur": {
+    "original": "Cheetah",
+    "type": "Skin"
+  },
+  "APE Royal Blossom": {
+    "original": "Magnolia",
+    "type": "Skin"
+  },
+  "APE Lunar Crystaline": {
+    "original": "White",
+    "type": "Skin"
+  },
+  "APE Default": {
+    "original": "Brown",
+    "type": "Skin"
+  },
+  "APE Chromatic Armor": {
+    "original": "Rainbow",
+    "type": "Skin"
+  },
+  "APE Oblivion Fossil Hide": {
+    "original": "Cream",
+    "type": "Skin"
+  },
+  "APE Abyssal Glow": {
+    "original": "Ocean",
+    "type": "Skin"
+  },
+  "APE Enchanted Onyx": {
+    "original": "Bronze",
+    "type": "Skin"
+  },
+  "APE Obsidian Flame": {
+    "original": "Black",
+    "type": "Skin"
+  },
+  "APE Starlit Frost": {
+    "original": "Silver",
+    "type": "Skin"
+  },
+  "APE Dragon's Blood": {
+    "original": "Red",
+    "type": "Skin"
+  },
+  "APE Ancient Amber": {
+    "original": "Dark Brown",
+    "type": "Skin"
+  },
+  "APE Celestial Alchemy": {
+    "original": "Gold",
+    "type": "Skin"
+  },
+  "APE Sapphire Frost": {
+    "original": "Blue",
+    "type": "Skin"
+  },
+  "APE Phoenix Feathers": {
+    "original": "Orange",
+    "type": "Skin"
+  },
+  "APE Quantum Circuitry": {
+    "original": "Robot",
+    "type": "Skin"
+  },
+  "APE Interstellar Aurora": {
+    "original": "Alien",
+    "type": "Skin"
+  },
+  "APE Psychedelic Spectrum": {
+    "original": "DMT",
+    "type": "Skin"
+  },
+  "APE Tropical Mirage": {
+    "original": "Baynana",
+    "type": "Skin"
+  },
+  "APE Grey Marble": {
+    "original": "Grey",
+    "type": "Skin"
+  },
+  "APE Necromancer's Veil": {
+    "original": "Zombie",
+    "type": "Skin"
+  },
+  "APE Digital Mirage": {
+    "original": "Noise",
+    "type": "Skin"
+  },
+  "APE Celestial Prism": {
+    "original": "Diamond",
+    "type": "Skin"
+  },
+  "APE Jungle Sovereign": {
+    "original": "Admiral",
+    "type": "Clothes"
+  },
+  "APE Apelink": {
+    "original": "Apelink",
+    "type": "Clothes"
+  },
+  "APE Elite Stealth": {
+    "original": "Army",
+    "type": "Clothes"
+  },
+  "APE Red Toddler": {
+    "original": "Baby",
+    "type": "Clothes"
+  },
+  "APE Desert Raider": {
+    "original": "Bandolier",
+    "type": "Clothes"
+  },
+  "APE Tropical Rebel": {
+    "original": "Baynana",
+    "type": "Clothes"
+  },
+  "APE Baynana Avenger": {
+    "original": "Baynanaman",
+    "type": "Clothes"
+  },
+  "APE Streetwise Swagger": {
+    "original": "Baysed",
+    "type": "Clothes"
+  },
+  "APE Outlaw Overlord": {
+    "original": "Biker",
+    "type": "Clothes"
+  },
+  "APE Blank": {
+    "original": "Blank",
+    "type": "Headwear"
+  },
+  "APE Shaman's Heirloom": {
+    "original": "Bone Necklace",
+    "type": "Clothes"
+  },
+  "APE Tribal Warrior": {
+    "original": "Caveman",
+    "type": "Clothes"
+  },
+  "APE Outlaw Elite": {
+    "original": "Cowboy",
+    "type": "Clothes"
+  },
+  "APE Gothic Bride": {
+    "original": "Dress",
+    "type": "Clothes"
+  },
+  "APE Warrior of the Fields": {
+    "original": "Farmer",
+    "type": "Clothes"
+  },
+  "APE Abyssal Harpooner": {
+    "original": "Fisherman",
+    "type": "Clothes"
+  },
+  "APE Sovereign's Amulet": {
+    "original": "Glory",
+    "type": "Clothes"
+  },
+  "APE Rainforest Mosaic": {
+    "original": "Hawaiian",
+    "type": "Clothes"
+  },
+  "APE Cypherlord": {
+    "original": "Hip-Hop Hoodie",
+    "type": "Clothes"
+  },
+  "APE Warrior's Tunic": {
+    "original": "Indian",
+    "type": "Clothes"
+  },
+  "APE Oni Kimono": {
+    "original": "Kimono",
+    "type": "Clothes"
+  },
+  "APE Sovereign's Mantle": {
+    "original": "King's Robe",
+    "type": "Clothes"
+  },
+  "APE Apocalyptic Warrior": {
+    "original": "Leather Jacket",
+    "type": "Clothes"
+  },
+  "APE Forester's Guard": {
+    "original": "Lumberjack",
+    "type": "Clothes"
+  },
+  "APE Diner's Champion": {
+    "original": "McPolo",
+    "type": "Clothes"
+  },
+  "APE Shadow Artist": {
+    "original": "Mime",
+    "type": "Clothes"
+  },
+  "APE Crypt Guardian": {
+    "original": "Mummy",
+    "type": "Clothes"
+  },
+  "APE Dread Captain's Regalia": {
+    "original": "Pirate",
+    "type": "Clothes"
+  },
+  "APE Riot Commander": {
+    "original": "Police",
+    "type": "Clothes"
+  },
+  "APE Escape Artist's Mark": {
+    "original": "Prison",
+    "type": "Clothes"
+  },
+  "APE Speculator's Shackle": {
+    "original": "Restrain",
+    "type": "Clothes"
+  },
+  "APE Predator's Prize": {
+    "original": "Ripped Tee",
+    "type": "Clothes"
+  },
+  "APE Warlord's Robe": {
+    "original": "Robe",
+    "type": "Clothes"
+  },
+  "APE Forest Sovereign": {
+    "original": "Robin",
+    "type": "Clothes"
+  },
+  "APE Admiral of the Abyss": {
+    "original": "Sailor",
+    "type": "Clothes"
+  },
+  "APE Cosmic Conqueror": {
+    "original": "Spacesuit",
+    "type": "Clothes"
+  },
+  "APE Stormbringer Jersey": {
+    "original": "Striped Tee",
+    "type": "Clothes"
+  },
+  "APE Tropical Overlord Straps": {
+    "original": "Suspenders",
+    "type": "Clothes"
+  },
+  "APE Dark Warrior's Cuirass": {
+    "original": "Tanktop",
+    "type": "Clothes"
+  },
+  "APE Nebula Core Tee": {
+    "original": "Tie Dye",
+    "type": "Clothes"
+  },
+  "APE Warlock's Shroud": {
+    "original": "Toga",
+    "type": "Clothes"
+  },
+  "APE Night Operative's Gear": {
+    "original": "Tracksuit",
+    "type": "Clothes"
+  },
+  "APE Abyssal Illusion Tee": {
+    "original": "Trippy",
+    "type": "Clothes"
+  },
+  "APE Shadow Weaver's Neckpiece": {
+    "original": "Turtleneck",
+    "type": "Clothes"
+  },
+  "APE Midnight Regalia": {
+    "original": "Tuxedo",
+    "type": "Clothes"
+  },
+  "APE Boardhide Gear": {
+    "original": "Tweed",
+    "type": "Clothes"
+  },
+  "APE Warlord's Fur Mantle": {
+    "original": "Viking",
+    "type": "Clothes"
+  },
+  "APE XRP Cryptowear Hoodie": {
+    "original": "XRP Hoodie",
+    "type": "Clothes"
+  },
+  "APE Angry": {
+    "original": "Angry",
+    "type": "Eyes"
+  },
+  "APE Bite Lips": {
+    "original": "Bite Lips",
+    "type": "Mouth"
+  },
+  "APE Bite Teeth": {
+    "original": "Bite Teeth",
+    "type": "Mouth"
+  },
+  "APE Thorn-Infused Jungle Gum": {
+    "original": "Bubble",
+    "type": "Mouth"
+  },
+  "APE Cyber Furnace-Cigar": {
+    "original": "Cigar",
+    "type": "Mouth"
+  },
+  "APE Nuclear Nogie": {
+    "original": "Cigarette",
+    "type": "Mouth"
+  },
+  "APE Pandemonium Pact Coin": {
+    "original": "Coin",
+    "type": "Mouth"
+  },
+  "APE Shard Blade": {
+    "original": "Dagger",
+    "type": "Mouth"
+  },
+  "APE Abyssal Shine Grill": {
+    "original": "Diamond Grill",
+    "type": "Mouth"
+  },
+  "APE Ravaged Donut": {
+    "original": "Donut",
+    "type": "Mouth"
+  },
+  "APE Sovereign Fang Grill": {
+    "original": "Gold Grill",
+    "type": "Mouth"
+  },
+  "APE Happy": {
+    "original": "Happy",
+    "type": "Eyes"
+  },
+  "APE Inferno Hotdog": {
+    "original": "Hotdog",
+    "type": "Mouth"
+  },
+  "APE Bite-Sec Ledger": {
+    "original": "Ledger",
+    "type": "Mouth"
+  },
+  "APE Prismatic Bite": {
+    "original": "Multicolor Grill",
+    "type": "Mouth"
+  },
+  "APE No Expression": {
+    "original": "No Expression",
+    "type": "Mouth"
+  },
+  "APE Normal": {
+    "original": "Normal",
+    "type": "Eyes"
+  },
+  "APE Mischief's Binky": {
+    "original": "Pacifier",
+    "type": "Mouth"
+  },
+  "APE Raucous Reveler": {
+    "original": "Party Horn",
+    "type": "Mouth"
+  },
+  "APE Piano Grill": {
+    "original": "Piano Grill",
+    "type": "Mouth"
+  },
+  "APE Baynana Puff": {
+    "original": "Pipe",
+    "type": "Mouth"
+  },
+  "APE Apocalyptic Slice": {
+    "original": "Pizza",
+    "type": "Mouth"
+  },
+  "APE Rainbow Spheres": {
+    "original": "Rainbow",
+    "type": "Mouth"
+  },
+  "APE Thorned Rose": {
+    "original": "Rose",
+    "type": "Mouth"
+  },
+  "APE Bronzed Decay Bite": {
+    "original": "Rotten Grill",
+    "type": "Mouth"
+  },
+  "APE S": {
+    "original": "S",
+    "type": "Mouth"
+  },
+  "APE Sad": {
+    "original": "Sad",
+    "type": "Eyes"
+  },
+  "APE Smug": {
+    "original": "Smug",
+    "type": "Mouth"
+  },
+  "APE Zipper Maw": {
+    "original": "Stitch",
+    "type": "Mouth"
+  },
+  "APE Tongue": {
+    "original": "Tongue",
+    "type": "Mouth"
+  },
+  "APE Timber Fang Grill": {
+    "original": "Wooden Grill",
+    "type": "Mouth"
+  },
+  "APE Yawn": {
+    "original": "Yawn",
+    "type": "Mouth"
+  },
+  "APE Yelling": {
+    "original": "Yelling",
+    "type": "Mouth"
+  },
+  "APE Dimensional Spectra Frames": {
+    "original": "3D",
+    "type": "Eyes"
+  },
+  "APE Retro Neon Eclipse": {
+    "original": "70s",
+    "type": "Eyes"
+  },
+  "APE Arrogant": {
+    "original": "Arrogant",
+    "type": "Eyes"
+  },
+  "APE Mystic Veil Vision": {
+    "original": "Blindfold",
+    "type": "Eyes"
+  },
+  "APE Cooling Fury Lazers": {
+    "original": "Blue Lazer",
+    "type": "Eyes"
+  },
+  "APE Closed Eyes": {
+    "original": "Closed Eyes",
+    "type": "Eyes"
+  },
+  "APE Brokenana Coins": {
+    "original": "Coins",
+    "type": "Eyes"
+  },
+  "APE Cyberpunk Visors": {
+    "original": "Cyber Shades",
+    "type": "Eyes"
+  },
+  "APE Dominition Warfare": {
+    "original": "Cyborg",
+    "type": "Eyes"
+  },
+  "APE Battle-Scarred Tactical Eyepatch": {
+    "original": "Eyepatch",
+    "type": "Eyes"
+  },
+  "APE Inferno Heart Eyes": {
+    "original": "Heart",
+    "type": "Eyes"
+  },
+  "APE Broken Optic Glasses": {
+    "original": "Optic Glasses",
+    "type": "Eyes"
+  },
+  "APE Red Lazer": {
+    "original": "Red Lazer",
+    "type": "Eyes"
+  },
+  "APE Scar": {
+    "original": "Scar",
+    "type": "Eyes"
+  },
+  "APE Scared": {
+    "original": "Scared",
+    "type": "Eyes"
+  },
+  "APE Shocked": {
+    "original": "Shocked",
+    "type": "Eyes"
+  },
+  "APE Crimson Razor Shutters": {
+    "original": "Shutter",
+    "type": "Eyes"
+  },
+  "APE Shy": {
+    "original": "Shy",
+    "type": "Eyes"
+  },
+  "APE Stoned": {
+    "original": "Stoned",
+    "type": "Eyes"
+  },
+  "APE Tattoo": {
+    "original": "Tattoo",
+    "type": "Eyes"
+  },
+  "APE Thinking": {
+    "original": "Thinking",
+    "type": "Eyes"
+  },
+  "APE X": {
+    "original": "X-Eyes",
+    "type": "Eyes"
+  },
+  "APE Zombie": {
+    "original": "Zombie",
+    "type": "Eyes"
+  },
+  "APE Warlord's Combat Helmet": {
+    "original": "Army Helmet",
+    "type": "Headwear"
+  },
+  "APE Azure Crest Cap": {
+    "original": "Backward Cap",
+    "type": "Headwear"
+  },
+  "APE Toxic Spiked Peel": {
+    "original": "Banana Peel",
+    "type": "Headwear"
+  },
+  "APE Rugged Jungle Bandana": {
+    "original": "Bandana",
+    "type": "Headwear"
+  },
+  "APE Darkforce Beanie": {
+    "original": "Beanie",
+    "type": "Headwear"
+  },
+  "APE Shadow XRP Overcap": {
+    "original": "Beanie Cap",
+    "type": "Headwear"
+  },
+  "APE Warrior's Shadow Beret": {
+    "original": "Beret",
+    "type": "Headwear"
+  },
+  "APE Storm Surge Bucker Hat": {
+    "original": "Bucket Hat",
+    "type": "Headwear"
+  },
+  "APE Night Prowler Ears": {
+    "original": "Bunny Ears",
+    "type": "Headwear"
+  },
+  "APE Culinary Warlord's Hat": {
+    "original": "Chef Hat",
+    "type": "Headwear"
+  },
+  "APE Cowboy Shadow Hat": {
+    "original": "Cowboy",
+    "type": "Headwear"
+  },
+  "APE Sovereign's Dark Coronet": {
+    "original": "Crown",
+    "type": "Headwear"
+  },
+  "APE Spirit Band": {
+    "original": "Feather Headband",
+    "type": "Headwear"
+  },
+  "APE Shadowed Jungle Fez": {
+    "original": "Fez",
+    "type": "Headwear"
+  },
+  "APE Abyssal Street Cap": {
+    "original": "Flat Cap",
+    "type": "Headwear"
+  },
+  "APE Inferno Mystic Cap": {
+    "original": "Gnome Hat",
+    "type": "Headwear"
+  },
+  "APE Eclipse Aurora Ring": {
+    "original": "Halo",
+    "type": "Headwear"
+  },
+  "APE Crimson Warrior Headband": {
+    "original": "Headband",
+    "type": "Headwear"
+  },
+  "APE Inferno Wrath Horns": {
+    "original": "Horns",
+    "type": "Headwear"
+  },
+  "APE Dark Harlequin Hat": {
+    "original": "Jester",
+    "type": "Headwear"
+  },
+  "APE Thorned Victory Halo": {
+    "original": "Laurel",
+    "type": "Headwear"
+  },
+  "APE Diner's Champion Cap": {
+    "original": "McCap",
+    "type": "Headwear"
+  },
+  "APE Razor Crest Mohawk": {
+    "original": "Mohawk",
+    "type": "Headwear"
+  },
+  "APE Spiked Hat Crown": {
+    "original": "P Hat",
+    "type": "Headwear"
+  },
+  "APE Cursed Origami Hat": {
+    "original": "Paper Hat",
+    "type": "Headwear"
+  },
+  "APE Twilight Carnival Cap": {
+    "original": "Party Hat",
+    "type": "Headwear"
+  },
+  "APE Crimson Fury Mane": {
+    "original": "Pink Hair",
+    "type": "Headwear"
+  },
+  "APE Dread Corsair": {
+    "original": "Pirate",
+    "type": "Headwear"
+  },
+  "APE Enforcer's Shadow Cap": {
+    "original": "Police Cap",
+    "type": "Headwear"
+  },
+  "APE Blazed Hair": {
+    "original": "Red Hair",
+    "type": "Headwear"
+  },
+  "APE Bladed Spinner Cap": {
+    "original": "Red Ripple Cap",
+    "type": "Headwear"
+  },
+  "APE Forest Rogue Cap": {
+    "original": "Robin",
+    "type": "Headwear"
+  },
+  "APE Subdued Sea Cap": {
+    "original": "Sailor",
+    "type": "Headwear"
+  },
+  "APE Jungle Shade Sombrero": {
+    "original": "Sombrero",
+    "type": "Headwear"
+  },
+  "APE Rotor Jungle Cap": {
+    "original": "Spinner",
+    "type": "Headwear"
+  },
+  "APE Superman": {
+    "original": "Superman",
+    "type": "Headwear"
+  },
+  "APE Thorned Shadow Hat": {
+    "original": "Tinfoil",
+    "type": "Headwear"
+  },
+  "APE Crimson Claw Topper": {
+    "original": "Top Hat",
+    "type": "Headwear"
+  },
+  "APE Monsoon Shadow Protector": {
+    "original": "Umbrella Hat",
+    "type": "Headwear"
+  },
+  "APE Jungle Warrior Cap": {
+    "original": "Viking",
+    "type": "Headwear"
+  },
+  "APE Jungle Shade Visor": {
+    "original": "Visor",
+    "type": "Headwear"
+  },
+  "APE Feral Cap": {
+    "original": "Wizard Hat",
+    "type": "Headwear"
+  },
+  "APE Cryptic Jungle X-Cap": {
+    "original": "XRP Cap",
+    "type": "Headwear"
+  },
+  "HOG Abyssal Viper Snakes": {
+    "original": "Snake",
+    "type": "Skin"
+  },
+  "HOG Eclipse Orb Canvas": {
+    "original": "Panda",
+    "type": "Skin"
+  },
+  "HOG Verdant Flux Dermis": {
+    "original": "Slimey",
+    "type": "Skin"
+  },
+  "HOG Lava ": {
+    "original": "Lava",
+    "type": "Skin"
+  },
+  "HOG Normal": {
+    "original": "Normal",
+    "type": "Skin"
+  },
+  "HOG Onyxhide Stripes": {
+    "original": "Zebra",
+    "type": "Skin"
+  },
+  "HOG Shadowhide Giraffe": {
+    "original": "Giraffe",
+    "type": "Skin"
+  },
+  "HOG Titanhide": {
+    "original": "Rhino",
+    "type": "Skin"
+  },
+  "HOG Fire from Apes": {
+    "original": "Black",
+    "type": "Skin"
+  },
+  "HOG Shadowstrike Commando": {
+    "original": "Camo",
+    "type": "Skin"
+  },
+  "HOG Obsidianfin Tigershadow": {
+    "original": "Tigershark",
+    "type": "Skin"
+  },
+  "HOG Cybershadow ": {
+    "original": "Cyborg",
+    "type": "Skin"
+  },
+  "HOG Junglesworn Scar": {
+    "original": "Orange",
+    "type": "Skin"
+  },
+  "HOG Abyssal Diamondglow": {
+    "original": "Diamond",
+    "type": "Skin"
+  },
+  "HOG Frostshadow Leopard": {
+    "original": "Snowleopard",
+    "type": "Skin"
+  },
+  "HOG Luminarctic Frostweave": {
+    "original": "White",
+    "type": "Skin"
+  },
+  "HOG Duskfang Bovine Hide": {
+    "original": "Cow",
+    "type": "Skin"
+  },
+  "HOG Gilded Fang Hide": {
+    "original": "Gold",
+    "type": "Skin"
+  },
+  "HOG Burned Bacon": {
+    "original": "Bacon",
+    "type": "Skin"
+  },
+  "HOG Blightrose Hide": {
+    "original": "Pink",
+    "type": "Skin"
+  },
+  "HOG Obsidian Azure Spikes": {
+    "original": "Blue",
+    "type": "Skin"
+  },
+  "HOG Rotvenom Husk": {
+    "original": "Zombie",
+    "type": "Skin"
+  },
+  "HOG Stonehide Primalgarb": {
+    "original": "Caveman",
+    "type": "Clothing"
+  },
+  "HOG Crimson Shadowweave": {
+    "original": "Polo",
+    "type": "Clothing"
+  },
+  "HOG Infernal Decathlete Jersey": {
+    "original": "Basketball Shirt",
+    "type": "Clothing"
+  },
+  "HOG None": {
+    "original": "None",
+    "type": "Headwear"
+  },
+  "HOG Cryptoshade XRP Hoodie": {
+    "original": "XRP Sweater",
+    "type": "Clothing"
+  },
+  "HOG Obsidiansteel Shadowplate": {
+    "original": "Futuristic",
+    "type": "Clothing"
+  },
+  "HOG Eldritch Slime Patches": {
+    "original": "Mud spots",
+    "type": "Clothing"
+  },
+  "HOG Twin Seraph Chains": {
+    "original": "Necklace",
+    "type": "Clothing"
+  },
+  "HOG Denim Shadowweave Shirt": {
+    "original": "Jeans Shirt",
+    "type": "Clothing"
+  },
+  "HOG Emberstrapped Penitence Attire": {
+    "original": "Prison",
+    "type": "Clothing"
+  },
+  "HOG Shadowline Veilshirt": {
+    "original": "Striped",
+    "type": "Clothing"
+  },
+  "HOG Nordic Valorweave Attire": {
+    "original": "Viking",
+    "type": "Clothing"
+  },
+  "HOG Regal Blushgown": {
+    "original": "Princess Dress",
+    "type": "Clothing"
+  },
+  "HOG Syndicate Suit": {
+    "original": "Mob suit",
+    "type": "Clothing"
+  },
+  "HOG Shadowgrill Uniform": {
+    "original": "Mc Polo",
+    "type": "Clothing"
+  },
+  "HOG ": {
+    "original": "Hoodie",
+    "type": "Clothing"
+  },
+  "HOG Training": {
+    "original": "Training Suit",
+    "type": "Clothing"
+  },
+  "HOG Jungle Baynana Tee": {
+    "original": "T Shirt",
+    "type": "Clothing"
+  },
+  "HOG Shadowcat Obsidian Robe": {
+    "original": "Leopard Bathrobe",
+    "type": "Clothing"
+  },
+  "HOG Heroic Hog Ensemble": {
+    "original": "Suoerhog",
+    "type": "Clothing"
+  },
+  "HOG Arctic Essence Sleeveless Tunic": {
+    "original": "Wife Beater",
+    "type": "Clothing"
+  },
+  "HOG Armory Harness": {
+    "original": "Ammo",
+    "type": "Clothing"
+  },
+  "HOG Harvest Horizon Ensemble": {
+    "original": "Farmer",
+    "type": "Clothing"
+  },
+  "HOG Midnight Maverick Shirt": {
+    "original": "Cowboy Shirt",
+    "type": "Clothing"
+  },
+  "HOG Feral Mark T-Shirt": {
+    "original": "Ripped",
+    "type": "Clothing"
+  },
+  "HOG Shadowsteel Knight Hauberk": {
+    "original": "Knight",
+    "type": "Clothing"
+  },
+  "HOG Midnight Rebel Biker Vest": {
+    "original": "Biker Vest",
+    "type": "Clothing"
+  },
+  "HOG Nexus Cyborg Armor": {
+    "original": "Robot",
+    "type": "Clothing"
+  },
+  "HOG Shadow Monk": {
+    "original": "Monk",
+    "type": "Clothing"
+  },
+  "HOG Obsidian Shadow Jacket": {
+    "original": "Leather Jacket",
+    "type": "Clothing"
+  },
+  "HOG Sleek Suspenders": {
+    "original": "Suspender",
+    "type": "Clothing"
+  },
+  "HOG Solar Tropic Thunder Shirt": {
+    "original": "Hawaiian Shirt",
+    "type": "Clothing"
+  },
+  "HOG Shadow Buccaneer Vest": {
+    "original": "Pirate",
+    "type": "Clothing"
+  },
+  "HOG Nebula Vanguard": {
+    "original": "Space",
+    "type": "Clothing"
+  },
+  "HOG Crimson Timberjack Flannel": {
+    "original": "Lumberjack",
+    "type": "Clothing"
+  },
+  "HOG Shadow XRP Vanguard Tee": {
+    "original": "XRP Shirt",
+    "type": "Clothing"
+  },
+  "HOG Scarlet Sentinel": {
+    "original": "Jacket",
+    "type": "Clothing"
+  },
+  "HOG Obsidian Ronin Armor": {
+    "original": "Samurai 2",
+    "type": "Clothing"
+  },
+  "HOG Jungle Vigilante": {
+    "original": "Police",
+    "type": "Clothing"
+  },
+  "HOG Abyssal Relic Shroud": {
+    "original": "Mummy",
+    "type": "Clothing"
+  },
+  "HOG Nirvana Embrace": {
+    "original": "Nirvana",
+    "type": "Clothing"
+  },
+  "HOG Shadowguard Futuraarmor": {
+    "original": "Futuristic 2",
+    "type": "Clothing"
+  },
+  "HOG Shadow Ronin Vanguard": {
+    "original": "Samurai",
+    "type": "Clothing"
+  },
+  "HOG Shadow Striped": {
+    "original": "Prison 2",
+    "type": "Clothing"
+  },
+  "HOG Regal Crimson Mantle": {
+    "original": "King",
+    "type": "Clothing"
+  },
+  "HOG Shadow Legion Command Regalia": {
+    "original": "Army General",
+    "type": "Clothing"
+  },
+  "HOG Obsidian Laboratory Vestments": {
+    "original": "Labcoat",
+    "type": "Clothing"
+  },
+  "HOG Tired H": {
+    "original": "Tired",
+    "type": "Eyes"
+  },
+  "HOG Blue eye": {
+    "original": "Blue eye",
+    "type": "Eyes"
+  },
+  "HOG Normal H": {
+    "original": "Normal",
+    "type": "Tusk"
+  },
+  "HOG Open H": {
+    "original": "Open",
+    "type": "Eyes"
+  },
+  "HOG Stellar Star Gaze Spectacles": {
+    "original": "Round Glasses",
+    "type": "Eyes"
+  },
+  "HOG Celestial Starlight Shades": {
+    "original": "Star Glasses",
+    "type": "Eyes"
+  },
+  "HOG Prism Vision Spectacles": {
+    "original": "3D Glasses",
+    "type": "Eyes"
+  },
+  "HOG Happy H": {
+    "original": "Happy",
+    "type": "Eyes"
+  },
+  "HOG Scar H": {
+    "original": "Scar",
+    "type": "Eyes"
+  },
+  "HOG Orange": {
+    "original": "Orange",
+    "type": "Eyes"
+  },
+  "HOG Mutated Omelette": {
+    "original": "Egg",
+    "type": "Eyes"
+  },
+  "HOG Piercing": {
+    "original": "Pierceing",
+    "type": "Eyes"
+  },
+  "HOG Voidcurse Raider Patch": {
+    "original": "Pirate Patch",
+    "type": "Eyes"
+  },
+  "HOG Cyber Eclipse Optic": {
+    "original": "Cyborg",
+    "type": "Eyes"
+  },
+  "HOG Nebula Gazer Monocle": {
+    "original": "Monocle",
+    "type": "Eyes"
+  },
+  "HOG Shy H": {
+    "original": "Shy",
+    "type": "Eyes"
+  },
+  "HOG Zombie": {
+    "original": "Zombie",
+    "type": "Mouth"
+  },
+  "HOG Duskraven Sentinel": {
+    "original": "Bird",
+    "type": "Eyes"
+  },
+  "HOG Coins H": {
+    "original": "Coins",
+    "type": "Eyes"
+  },
+  "HOG Veil of Ashrift": {
+    "original": "Highwayman Mask",
+    "type": "Eyes"
+  },
+  "HOG XX H": {
+    "original": "XX",
+    "type": "Eyes"
+  },
+  "HOG Shocked ": {
+    "original": "3D Eyes",
+    "type": "Eyes"
+  },
+  "HOG High H": {
+    "original": "High",
+    "type": "Eyes"
+  },
+  "HOG Venomshade": {
+    "original": "Green",
+    "type": "Eyes"
+  },
+  "HOG Bloodthorn": {
+    "original": "Heart",
+    "type": "Eyes"
+  },
+  "HOG Void Spiral Lenses": {
+    "original": "Hypno",
+    "type": "Eyes"
+  },
+  "HOG Sleepy H": {
+    "original": "Sleepy",
+    "type": "Eyes"
+  },
+  "HOG Voidstrike Shades": {
+    "original": "Harley",
+    "type": "Eyes"
+  },
+  "HOG Eclipse Vision": {
+    "original": "Future",
+    "type": "Eyes"
+  },
+  "HOG Red laser H": {
+    "original": "Red laser",
+    "type": "Eyes"
+  },
+  "HOG Thug Shadow": {
+    "original": "Thuglife",
+    "type": "Eyes"
+  },
+  "HOG Blue Laser H": {
+    "original": "Blue laser",
+    "type": "Eyes"
+  },
+  "HOG Backwards Bloodshade Raider Cap": {
+    "original": "Backwards Cap",
+    "type": "Headwear"
+  },
+  "HOG Duskrider Woven Hat 2": {
+    "original": "Strawhat 2",
+    "type": "Headwear"
+  },
+  "HOG Sunrift Warhelm": {
+    "original": "Viking",
+    "type": "Headwear"
+  },
+  "HOG Obsidian Fang War Hat": {
+    "original": "Chinese Hat",
+    "type": "Headwear"
+  },
+  "HOG Shadowcrest Nest": {
+    "original": "Bird",
+    "type": "Tusk"
+  },
+  "HOG Dreadwave Resonators": {
+    "original": "Retro Headphones",
+    "type": "Headwear"
+  },
+  "HOG Halo": {
+    "original": "Halo",
+    "type": "Headwear"
+  },
+  "HOG Bloodshade Raider Cap": {
+    "original": "Baseball Cap",
+    "type": "Headwear"
+  },
+  "HOG Warlord's Beret": {
+    "original": "Army Beret",
+    "type": "Headwear"
+  },
+  "HOG Furychimp Hood": {
+    "original": "Monkey hat",
+    "type": "Headwear"
+  },
+  "HOG Stormborne Rotor Cap": {
+    "original": "Propeller",
+    "type": "Headwear"
+  },
+  "HOG Void Corsair Tricorn": {
+    "original": "Pirate",
+    "type": "Headwear"
+  },
+  "HOG Duskrider Sombrero": {
+    "original": "Sombrero",
+    "type": "Headwear"
+  },
+  "HOG Duskrider Headwrap": {
+    "original": "Bandana",
+    "type": "Headwear"
+  },
+  "HOG Zombie": {
+    "original": "McHog",
+    "type": "Headwear"
+  },
+  "HOG Inferno Fang Mohawk": {
+    "original": "Mohawk",
+    "type": "Headwear"
+  },
+  "HOG Warborn Crest Helm": {
+    "original": "Knight Helmet",
+    "type": "Headwear"
+  },
+  "HOG Ironwind Aviator Cap": {
+    "original": "Helmet",
+    "type": "Headwear"
+  },
+  "HOG Duskrider Woven Hat": {
+    "original": "Straw hat",
+    "type": "Headwear"
+  },
+  "HOG Bloodcrest XRP Cap": {
+    "original": "XRP Hat",
+    "type": "Headwear"
+  },
+  "HOG Phantom Striker Headband": {
+    "original": "Samurai",
+    "type": "Headwear"
+  },
+  "HOG Frostborne Hat": {
+    "original": "Russian Hat",
+    "type": "Headwear"
+  },
+  "HOG Dustspire Cap": {
+    "original": "Flat Cap",
+    "type": "Headwear"
+  },
+  "HOG Toxic Drip Reactor Cap": {
+    "original": "Drinking Cap",
+    "type": "Headwear"
+  },
+  "HOG Obsidian Hex Topper": {
+    "original": "Tophat",
+    "type": "Headwear"
+  },
+  "HOG Ashfang Headdress": {
+    "original": "Chief",
+    "type": "Headwear"
+  },
+  "HOG Thornforged Crown": {
+    "original": "Crown",
+    "type": "Headwear"
+  },
+  "HOG Baynana Huskhelm": {
+    "original": "Banana",
+    "type": "Headwear"
+  },
+  "HOG Toxveil Turban": {
+    "original": "Indian Hat",
+    "type": "Headwear"
+  },
+  "HOG Ashrack Antlers": {
+    "original": "Antler",
+    "type": "Headwear"
+  },
+  "HOG Hog Enforcer Cap?": {
+    "original": "Police",
+    "type": "Headwear"
+  },
+  "HOG Shadowspire Beret": {
+    "original": "Beret",
+    "type": "Headwear"
+  },
+  "HOG Gravelight Optics": {
+    "original": "Nightvision",
+    "type": "Headwear"
+  },
+  "HOG Close": {
+    "original": "Closed",
+    "type": "Mouth"
+  },
+  "HOG Infernapep Slice": {
+    "original": "Pizza",
+    "type": "Mouth"
+  },
+  "HOG Angry": {
+    "original": "Angry",
+    "type": "Mouth"
+  },
+  "HOG Blazestick": {
+    "original": "Dynamite",
+    "type": "Mouth"
+  },
+  "HOG Sad": {
+    "original": "Sad",
+    "type": "Mouth"
+  },
+  "HOG Grin": {
+    "original": "Grin",
+    "type": "Mouth"
+  },
+  "HOG Rotten": {
+    "original": "Rotten",
+    "type": "Mouth"
+  },
+  "HOG Stitch": {
+    "original": "Stitch",
+    "type": "Mouth"
+  },
+  "HOG Emberfang Dagger": {
+    "original": "Dagger",
+    "type": "Mouth"
+  },
+  "HOG Smofang Emberroll": {
+    "original": "Big Cigarette",
+    "type": "Mouth"
+  },
+  "HOG Blightwrap Cinderroll": {
+    "original": "Cigar",
+    "type": "Mouth"
+  },
+  "HOG Venomlick Shardpop": {
+    "original": "Lolly",
+    "type": "Mouth"
+  },
+  "HOG Feralbane Husk": {
+    "original": "Banana",
+    "type": "Mouth"
+  },
+  "HOG Prismfang Grille": {
+    "original": "Rainbow Teeth",
+    "type": "Mouth"
+  },
+  "HOG Molten Maw": {
+    "original": "Gold Teeth",
+    "type": "Mouth"
+  },
+  "HOG Long Beard": {
+    "original": "Long Beard",
+    "type": "Mouth"
+  },
+  "HOG Sunfang Pipe": {
+    "original": "Gold Pipe",
+    "type": "Mouth"
+  },
+  "HOG Shardsmoke Scepter": {
+    "original": "Diamond Pipe",
+    "type": "Mouth"
+  },
+  "HOG Oblivion Rainbow": {
+    "original": "Rainbow Doodle",
+    "type": "Mouth"
+  },
+  "HOG Tongue": {
+    "original": "Tongue",
+    "type": "Mouth"
+  },
+  "HOG Xumm": {
+    "original": "Xumm",
+    "type": "Mouth"
+  },
+  "HOG Ashvein Stick": {
+    "original": "Cigarette",
+    "type": "Mouth"
+  },
+  "HOG Shatterbite Grille": {
+    "original": "Diamond Teeth",
+    "type": "Mouth"
+  },
+  "HOG Ironbark Tusks": {
+    "original": "Wooden Tusk",
+    "type": "Tusk"
+  },
+  "HOG Silver Tusks": {
+    "original": "Silver Tusk",
+    "type": "Tusk"
+  },
+  "HOG Sovereign Fang Bone": {
+    "original": "Gold",
+    "type": "Tusk"
+  },
+  "HOG Broken Bone": {
+    "original": "Broken",
+    "type": "Tusk"
+  },
+  "HOG Verdigris Fang": {
+    "original": "Bronze Tusk",
+    "type": "Tusk"
+  },
+  "HOG Spineforge Tusks": {
+    "original": "Iron",
+    "type": "Tusk"
+  },
+  "HOG Songbird Fangs": {
+    "original": "Songbird Color",
+    "type": "Tusk"
+  },
+  "HOG Cybernetic Tusks": {
+    "original": "Tech Tusk",
+    "type": "Tusk"
+  },
+  "HOG Goreglop Tusks": {
+    "original": "Slimey",
+    "type": "Tusk"
+  },
+  "HOG Moltusk Fangs": {
+    "original": "Lava",
+    "type": "Tusk"
+  },
+  "HOG Blightfang Katana": {
+    "original": "Samurai Sword",
+    "type": "Tusk"
+  },
+  "HOG Rotfang Husk": {
+    "original": "Banana",
+    "type": "Tusk"
+  },
+  "HOG Bloodstripe Fang": {
+    "original": "Candy",
+    "type": "Tusk"
+  },
+  "HOG Abyssal Shine Bone": {
+    "original": "Diamond Tusk",
+    "type": "Tusk"
   }
+};
+  
+  console.log('Loaded embedded trait mapping with', Object.keys(traitMapping).length, 'entries');
 }
+
+
 
 /**
  * Get the original trait name for a given new trait name
@@ -590,7 +1942,7 @@ async function init() {
   try {
     // Load the trait mapping first
     console.log('About to load trait mapping...');
-    await loadTraitMapping();
+    loadTraitMapping();
     console.log('Trait mapping loaded, proceeding with manifest...');
     
     // Get the trait manifest from embedded data
