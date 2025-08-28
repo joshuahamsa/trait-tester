@@ -108,11 +108,11 @@ def analyze_matches():
             new_trait = csv_row['New_Trait']
             new_trait_with_id = csv_row['New_Trait_w_ID']
             
-            # Check if either version matches a script trait
+            # Check if either version matches a script trait (case-insensitive)
             found = False
             for script_trait in script_trait_names:
-                if (new_trait in script_trait or 
-                    new_trait_with_id in script_trait):
+                if (new_trait.lower() in script_trait.lower() or 
+                    new_trait_with_id.lower() in script_trait.lower()):
                     matches.append({
                         'csv_original': csv_row['Original_Trait'],
                         'csv_new': new_trait,
@@ -136,8 +136,8 @@ def analyze_matches():
             for csv_row in csv_traits:
                 new_trait = csv_row['New_Trait']
                 new_trait_with_id = csv_row['New_Trait_w_ID']
-                if (new_trait in script_trait or 
-                    new_trait_with_id in script_trait):
+                if (new_trait.lower() in script_trait.lower() or 
+                    new_trait_with_id.lower() in script_trait.lower()):
                     found = True
                     break
             if not found:
@@ -305,11 +305,11 @@ def analyze_matches():
             new_trait = csv_row['New_Trait']
             new_trait_with_id = csv_row['New_Trait_w_ID']
             
-            # Check if either version matches a script trait
+            # Check if either version matches a script trait (case-insensitive)
             found = False
             for script_trait in script_trait_names:
-                if (new_trait in script_trait or 
-                    new_trait_with_id in script_trait):
+                if (new_trait.lower() in script_trait.lower() or 
+                    new_trait_with_id.lower() in script_trait.lower()):
                     matches.append({
                         'csv_original': csv_row['Original_Trait'],
                         'csv_new': new_trait,
@@ -332,8 +332,8 @@ def analyze_matches():
             for csv_row in csv_traits:
                 new_trait = csv_row['New_Trait']
                 new_trait_with_id = csv_row['New_Trait_w_ID']
-                if (new_trait in script_trait or 
-                    new_trait_with_id in script_trait):
+                if (new_trait.lower() in script_trait.lower() or 
+                    new_trait_with_id.lower() in script_trait.lower()):
                     found = True
                     break
             if not found:

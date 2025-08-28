@@ -8,9 +8,9 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 |--------|-------|
 | Total Script.js traits | 327 |
 | Total CSV traits | 302 |
-| ✅ Found matches | 256 |
-| ❌ Missing in script.js | 46 |
-| ❌ Unassociated traits | 18 |
+| ✅ Found matches | 259 |
+| ❌ Missing in script.js | 43 |
+| ❌ Unassociated traits | 14 |
 
 ### All Missing in Script.js (Need Artist Tickets)
 
@@ -24,7 +24,6 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 | APE | Mouth | Donut | APE Ravaged Donut |
 | APE | Mouth | Rainbow | APE Rainbow Spheres |
 | HOG | Mouth | Closed | HOG Closed H |
-| HOG | Mouth | Angry | HOG Angry H |
 | HOG | Mouth | Dynamite | HOG Blazestick |
 | HOG | Mouth | Sad | HOG Sad H |
 | HOG | Mouth | Grin | HOG Grin H |
@@ -41,7 +40,6 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 | HOG | Mouth | Cigarette | HOG Ashvein Stick |
 | HOG | Mouth | Diamond Teeth | HOG Shatterbite Grille |
 | APE | Eyes | Cyborg | APE Dominition Warfare |
-| HOG | Eyes | Blue eye | HOG Blue eye |
 | HOG | Eyes | Happy | HOG Happy H |
 | HOG | Eyes | Egg | HOG Mutated Omelette |
 | HOG | Eyes | Pierceing | HOG Piercing |
@@ -57,7 +55,6 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 | HOG | Clothing | Training Suit | HOG Training |
 | HOG | Clothing | Suspender | HOG Sleek Suspenders |
 | HOG | Clothing | Samurai 2 | HOG Obsidian Ronin Armor |
-| HOG | Clothing | Nirvana | HOG Nirvana Embrace |
 | HOG | Clothing | Samurai | HOG Shadow Ronin Vanguard |
 | HOG | Clothing | Army General | HOG Shadow Legion Command Regalia |
 | HOG | Tusk | Normal | HOG Normal H |
@@ -69,13 +66,9 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 |------------|------------|----------------|---------------|
 | HOG | Unknown | Azure Spikes | HOG Azure Spikes |
 | HOG | Unknown | TBD | HOG TBD |
-| APE | Unknown | Prism Jaw | APE Prism Jaw |
-| HOG | Unknown | angry | HOG angry |
-| HOG | Unknown | Close | HOG Close |
 | HOG | Unknown | Grin | HOG Grin |
 | HOG | Unknown | Rainbow Puke | HOG Rainbow Puke |
 | APE | Eyes | Eyes | APE Eyes |
-| HOG | Eyes | Blue Eye | HOG Blue Eye |
 | HOG | Eyes | Gold Laser | HOG Gold Laser |
 | HOG | Eyes | Green Laser | HOG Green Laser |
 | HOG | Headwear | Aviation Cap | HOG Aviation Cap |
@@ -130,9 +123,9 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 |--------|-------|
 | Script.js traits | 42 |
 | CSV traits | 57 |
-| ✅ Matches | 37 |
-| ❌ Missing in script.js | 20 |
-| ❌ Unassociated traits | 5 |
+| ✅ Matches | 38 |
+| ❌ Missing in script.js | 19 |
+| ❌ Unassociated traits | 2 |
 
 ### Missing in script.js
 
@@ -140,7 +133,6 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 - Donut → Ravaged Donut (APE Ravaged Donut)
 - Rainbow → Rainbow Spheres (APE Rainbow Spheres)
 - Closed → Closed H (HOG Closed H)
-- Angry → Angry H (HOG Angry H)
 - Dynamite → Blazestick (HOG Blazestick)
 - Sad → Sad H (HOG Sad H)
 - Grin → Grin H (HOG Grin H)
@@ -159,9 +151,6 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 
 ### Unassociated Traits
 
-- APE Prism Jaw
-- HOG angry
-- HOG Close
 - HOG Grin
 - HOG Rainbow Puke
 
@@ -181,14 +170,13 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 |--------|-------|
 | Script.js traits | 57 |
 | CSV traits | 59 |
-| ✅ Matches | 53 |
-| ❌ Missing in script.js | 6 |
-| ❌ Unassociated traits | 4 |
+| ✅ Matches | 54 |
+| ❌ Missing in script.js | 5 |
+| ❌ Unassociated traits | 3 |
 
 ### Missing in script.js
 
 - Cyborg → Dominition Warfare (APE Dominition Warfare)
-- Blue eye → Blue eye (HOG Blue eye)
 - Happy → Happy H (HOG Happy H)
 - Egg → Mutated Omelette (HOG Mutated Omelette)
 - Pierceing → Piercing (HOG Piercing)
@@ -197,7 +185,6 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 ### Unassociated Traits
 
 - APE Eyes
-- HOG Blue Eye
 - HOG Gold Laser
 - HOG Green Laser
 
@@ -254,8 +241,8 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 |--------|-------|
 | Script.js traits | 93 |
 | CSV traits | 47 |
-| ✅ Matches | 38 |
-| ❌ Missing in script.js | 9 |
+| ✅ Matches | 39 |
+| ❌ Missing in script.js | 8 |
 | ❌ Unassociated traits | 0 |
 
 ### Missing in script.js
@@ -266,7 +253,6 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 - Training Suit → Training (HOG Training)
 - Suspender → Sleek Suspenders (HOG Sleek Suspenders)
 - Samurai 2 → Obsidian Ronin Armor (HOG Obsidian Ronin Armor)
-- Nirvana → Nirvana Embrace (HOG Nirvana Embrace)
 - Samurai → Shadow Ronin Vanguard (HOG Shadow Ronin Vanguard)
 - Army General → Shadow Legion Command Regalia (HOG Shadow Legion Command Regalia)
 
