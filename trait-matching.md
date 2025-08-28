@@ -1,6 +1,8 @@
 # Trait Matching Analysis
 
-This document analyzes the matching between traits in `script.js` and the CSV file across different categories.
+This document analyzes the matching between traits in `script.js` and the CSV file across different categories.  
+*User note:* `script.js` *refers to what is shown in the Trait Testing app.*  
+*The CSV is the export of all of the traits from the spreadsheet.*
 
 ## SKIN
 
