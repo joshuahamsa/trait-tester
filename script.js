@@ -21,8 +21,16 @@ let traitMapping = {};
  */
 async function loadTraitMapping() {
   try {
+    console.log('Starting to load trait mapping...');
     const response = await fetch('trait_mapping.json');
+    console.log('Fetch response status:', response.status);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
     const mappingData = await response.json();
+    console.log('JSON parsed successfully');
     
     // Copy the mapping data to our global variable
     traitMapping = mappingData;
@@ -581,7 +589,9 @@ async function init() {
   console.log('Initializing application...');
   try {
     // Load the trait mapping first
+    console.log('About to load trait mapping...');
     await loadTraitMapping();
+    console.log('Trait mapping loaded, proceeding with manifest...');
     
     // Get the trait manifest from embedded data
     const manifest = getTraitManifest();
