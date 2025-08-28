@@ -6,72 +6,68 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 
 | Metric | Count |
 |--------|-------|
-| Total Script.js traits | 420 |
-| Total CSV traits | 350 |
-| ✅ Found matches | 294 |
-| ❌ Missing in script.js | 56 |
-| ❌ Unassociated traits | 70 |
+| Total Script.js traits | 327 |
+| Total CSV traits | 302 |
+| ✅ Found matches | 250 |
+| ❌ Missing in script.js | 52 |
+| ❌ Unassociated traits | 21 |
 
 ### All Missing in Script.js (Need Artist Tickets)
 
 | Collection | Trait Type | Original Trait | Updated Trait |
 |------------|------------|----------------|---------------|
-| HOG | Unknown | Normal | HOG Normal |
-| HOG | Unknown | Black | HOG Fire from Apes |
-| HOG | Unknown | Diamond | HOG Abyssal Diamondglow |
-| HOG | Unknown | Cow | HOG Duskfang Bovine Hide |
-| HOG | Unknown | Blue | HOG Obsidian Azure Spikes |
-| APE | Unknown | Blank | APE Blank |
-| APE | Unknown | Sailor | APE Admiral of the Abyss |
-| APE | Unknown | Spacesuit | APE Cosmic Conqueror |
-| APE | Unknown | Tie Dye | APE Nebula Core Tee |
-| APE | Unknown | Bubble | APE Thorn-Infused Jungle Gum |
-| APE | Unknown | Donut | APE Ravaged Donut |
-| APE | Unknown | Hotdog | APE Inferno Hotdog |
-| APE | Unknown | Rainbow | APE Rainbow Spheres |
-| HOG | Unknown | Closed | HOG Closed H |
-| HOG | Unknown | Pizza | HOG Infernapep Slice |
-| HOG | Unknown | Angry | HOG Angry H |
-| HOG | Unknown | Dynamite | HOG Blazestick |
-| HOG | Unknown | Sad | HOG Sad H |
-| HOG | Unknown | Grin | HOG Grin H |
-| HOG | Unknown | Dagger | HOG Emberfang Dagger |
-| HOG | Unknown | Big Cigarette | HOG Smofang Emberroll |
-| HOG | Unknown | Cigar | HOG Blightwrap Cinderroll |
-| HOG | Unknown | Lolly | HOG Venomlick Shardpop |
-| HOG | Unknown | Banana | HOG Feralbane Husk |
-| HOG | Unknown | Rainbow Teeth | HOG Prismfang Grille |
-| HOG | Unknown | Gold Teeth | HOG Molten Maw |
-| HOG | Unknown | Gold Pipe | HOG Sunfang Pipe |
-| HOG | Unknown | Diamond Pipe | HOG Shardsmoke Scepter |
-| HOG | Unknown | Rainbow Doodle | HOG Oblivion Rainbow |
-| HOG | Unknown | Cigarette | HOG Ashvein Stick |
-| HOG | Unknown | Diamond Teeth | HOG Shatterbite Grille |
-| APE | Unknown | Cyborg | APE Dominition Warfare |
-| APE | Unknown | Shutter | APE Crimson Razor Shutters |
-| HOG | Unknown | Blue eye | HOG Blue eye |
-| HOG | Unknown | Happy | HOG Happy H |
-| HOG | Unknown | Egg | HOG Mutated Omelette |
-| HOG | Unknown | Pierceing | HOG Piercing |
-| HOG | Unknown | Highwayman Mask | HOG Veil of Ashrift |
-| HOG | Unknown | Red laser | HOG Red laser H |
-| APE | Unknown | Blank | APE Blank |
-| HOG | Unknown | Backwards Cap | HOG Backwards Bloodshade Raider Cap |
-| HOG | Unknown | Chinese Hat | HOG Obsidian Fang War Hat |
-| HOG | Unknown | McHog | HOG Zombie |
-| HOG | Unknown | Helmet | HOG Ironwind Aviator Cap |
-| HOG | Unknown | Beret | HOG Shadowspire Beret |
-| HOG | Unknown | Futuristic | HOG Obsidiansteel Shadowplate |
-| HOG | Unknown | Mud spots | HOG Eldritch Slime Patches |
-| HOG | Unknown | Mc Polo | HOG Shadowgrill Uniform |
-| HOG | Unknown | Training Suit | HOG Training |
-| HOG | Unknown | Suspender | HOG Sleek Suspenders |
-| HOG | Unknown | Samurai 2 | HOG Obsidian Ronin Armor |
-| HOG | Unknown | Nirvana | HOG Nirvana Embrace |
-| HOG | Unknown | Samurai | HOG Shadow Ronin Vanguard |
-| HOG | Unknown | Army General | HOG Shadow Legion Command Regalia |
-| HOG | Unknown | Normal | HOG Normal H |
-| HOG | Unknown | Silver Tusk | HOG Silver Tusks |
+| HOG | Skin | Normal | HOG Normal |
+| HOG | Skin | Black | HOG Fire from Apes |
+| HOG | Skin | Diamond | HOG Abyssal Diamondglow |
+| HOG | Skin | Cow | HOG Duskfang Bovine Hide |
+| HOG | Skin | Blue | HOG Obsidian Azure Spikes |
+| APE | Mouth | Bubble | APE Thorn-Infused Jungle Gum |
+| APE | Mouth | Donut | APE Ravaged Donut |
+| APE | Mouth | Hotdog | APE Inferno Hotdog |
+| APE | Mouth | Rainbow | APE Rainbow Spheres |
+| HOG | Mouth | Closed | HOG Closed H |
+| HOG | Mouth | Pizza | HOG Infernapep Slice |
+| HOG | Mouth | Angry | HOG Angry H |
+| HOG | Mouth | Dynamite | HOG Blazestick |
+| HOG | Mouth | Sad | HOG Sad H |
+| HOG | Mouth | Grin | HOG Grin H |
+| HOG | Mouth | Dagger | HOG Emberfang Dagger |
+| HOG | Mouth | Big Cigarette | HOG Smofang Emberroll |
+| HOG | Mouth | Cigar | HOG Blightwrap Cinderroll |
+| HOG | Mouth | Lolly | HOG Venomlick Shardpop |
+| HOG | Mouth | Banana | HOG Feralbane Husk |
+| HOG | Mouth | Rainbow Teeth | HOG Prismfang Grille |
+| HOG | Mouth | Gold Teeth | HOG Molten Maw |
+| HOG | Mouth | Gold Pipe | HOG Sunfang Pipe |
+| HOG | Mouth | Diamond Pipe | HOG Shardsmoke Scepter |
+| HOG | Mouth | Rainbow Doodle | HOG Oblivion Rainbow |
+| HOG | Mouth | Cigarette | HOG Ashvein Stick |
+| HOG | Mouth | Diamond Teeth | HOG Shatterbite Grille |
+| APE | Eyes | Cyborg | APE Dominition Warfare |
+| APE | Eyes | Shutter | APE Crimson Razor Shutters |
+| HOG | Eyes | Blue eye | HOG Blue eye |
+| HOG | Eyes | Happy | HOG Happy H |
+| HOG | Eyes | Egg | HOG Mutated Omelette |
+| HOG | Eyes | Pierceing | HOG Piercing |
+| HOG | Eyes | Highwayman Mask | HOG Veil of Ashrift |
+| HOG | Eyes | Red laser | HOG Red laser H |
+| APE | Headwear | Blank | APE Blank |
+| HOG | Headwear | Backwards Cap | HOG Backwards Bloodshade Raider Cap |
+| HOG | Headwear | Chinese Hat | HOG Obsidian Fang War Hat |
+| HOG | Headwear | McHog | HOG Zombie |
+| HOG | Headwear | Helmet | HOG Ironwind Aviator Cap |
+| HOG | Headwear | Beret | HOG Shadowspire Beret |
+| HOG | Clothing | Futuristic | HOG Obsidiansteel Shadowplate |
+| HOG | Clothing | Mud spots | HOG Eldritch Slime Patches |
+| HOG | Clothing | Mc Polo | HOG Shadowgrill Uniform |
+| HOG | Clothing | Training Suit | HOG Training |
+| HOG | Clothing | Suspender | HOG Sleek Suspenders |
+| HOG | Clothing | Samurai 2 | HOG Obsidian Ronin Armor |
+| HOG | Clothing | Nirvana | HOG Nirvana Embrace |
+| HOG | Clothing | Samurai | HOG Shadow Ronin Vanguard |
+| HOG | Clothing | Army General | HOG Shadow Legion Command Regalia |
+| HOG | Tusk | Normal | HOG Normal H |
+| HOG | Tusk | Silver Tusk | HOG Silver Tusks |
 
 ### All Unassociated Traits (Need CSV Entries)
 
@@ -79,74 +75,25 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 |------------|------------|----------------|---------------|
 | HOG | Unknown | Azure Spikes | HOG Azure Spikes |
 | HOG | Unknown | TBD | HOG TBD |
-| APE | Unknown | None | APE None |
-| APE | Unknown | Sailor | APE Sailor |
-| APE | Unknown | Tanktop Dark Warrior s Cuirass | APE Tanktop Dark Warrior s Cuirass |
-| HOG | Clothes | Abyssal Relic Shroud | HOG Abyssal Relic Shroud |
-| HOG | Clothes | Arctic Essence Sleeveless Tunic | HOG Arctic Essence Sleeveless Tunic |
-| HOG | Skin | Armory Harness | HOG Armory Harness |
-| HOG | Unknown | Army General | HOG Army General |
-| HOG | Unknown | Crimson Shadowweave | HOG Crimson Shadowweave |
-| HOG | Unknown | Crimson Timberjack Flannel | HOG Crimson Timberjack Flannel |
-| HOG | Clothes | Cryptoshade XRP Hoodie | HOG Cryptoshade XRP Hoodie |
-| HOG | Clothes | Denim Shadowweave Shirt | HOG Denim Shadowweave Shirt |
-| HOG | Clothes | Emberstrapped Penitence Attire | HOG Emberstrapped Penitence Attire |
-| HOG | Clothes | Feral Mark T-Shirt | HOG Feral Mark T-Shirt |
-| HOG | Unknown | FUTURISTIC | HOG FUTURISTIC |
-| HOG | Clothes | Harvest Horizon Ensemble | HOG Harvest Horizon Ensemble |
-| HOG | Clothes | Heroic Hog Ensemble | HOG Heroic Hog Ensemble |
-| HOG | Clothes | HOODIE | HOG HOODIE |
-| HOG | Clothes | Infernal Decathlete Jersey | HOG Infernal Decathlete Jersey |
-| HOG | Clothes | Jungle Baynana Tee | HOG Jungle Baynana Tee |
-| HOG | Unknown | Jungle Vigilante | HOG Jungle Vigilante |
-| HOG | Clothes | Midnight Maverick Shirt | HOG Midnight Maverick Shirt |
-| HOG | Clothes | Midnight Rebel Biker Vest | HOG Midnight Rebel Biker Vest |
-| HOG | Unknown | Nebula Vanguard | HOG Nebula Vanguard |
-| HOG | Skin | Nexus Cyborg Armor | HOG Nexus Cyborg Armor |
-| HOG | Unknown | NIrvana Embrace | HOG NIrvana Embrace |
-| HOG | Unknown | None | HOG None |
-| HOG | Clothes | Nordic Valorweave Attire | HOG Nordic Valorweave Attire |
-| HOG | Clothes | Obsidian Laboratory Vestments | HOG Obsidian Laboratory Vestments |
-| HOG | Clothes | Obsidian Shadow Jacket | HOG Obsidian Shadow Jacket |
-| HOG | Unknown | POLO | HOG POLO |
-| HOG | Unknown | Regal Blushgown | HOG Regal Blushgown |
-| HOG | Clothes | Regal Crimson Mantle | HOG Regal Crimson Mantle |
-| HOG | Unknown | SAMURAI 2 | HOG SAMURAI 2 |
-| HOG | Unknown | SAMURAI | HOG SAMURAI |
-| HOG | Unknown | Scarlet Sentinel 2 | HOG Scarlet Sentinel 2 |
-| HOG | Unknown | Scarlet Sentinel | HOG Scarlet Sentinel |
-| HOG | Clothes | Shadow Buccaneer Vest | HOG Shadow Buccaneer Vest |
-| HOG | Unknown | Shadow Monk | HOG Shadow Monk |
-| HOG | Unknown | Shadow Striped | HOG Shadow Striped |
-| HOG | Clothes | Shadow XRP Vanguard Tee | HOG Shadow XRP Vanguard Tee |
-| HOG | Clothes | Shadowcat Obsidian Robe | HOG Shadowcat Obsidian Robe |
-| HOG | Skin | Shadowguard Futuraarmor | HOG Shadowguard Futuraarmor |
-| HOG | Clothes | Shadowsteel Knight Hauberk | HOG Shadowsteel Knight Hauberk |
-| HOG | Unknown | Shoulder Strap | HOG Shoulder Strap |
-| HOG | Clothes | Solar Tropic Thunder Shirt | HOG Solar Tropic Thunder Shirt |
-| HOG | Skin | Stonehide Primalgarb | HOG Stonehide Primalgarb |
-| HOG | Clothes | Striped Shadowline Veilshirt | HOG Striped Shadowline Veilshirt |
-| HOG | Clothes | Syndicate Suit | HOG Syndicate Suit |
-| HOG | Unknown | Twin Seraph Chains | HOG Twin Seraph Chains |
 | APE | Unknown | Inferno Hot Dog | APE Inferno Hot Dog |
 | APE | Unknown | Prism Jaw | APE Prism Jaw |
 | HOG | Unknown | angry | HOG angry |
 | HOG | Unknown | Close | HOG Close |
 | HOG | Unknown | Grin | HOG Grin |
 | HOG | Unknown | Rainbow Puke | HOG Rainbow Puke |
-| APE | Eyes | Eyes | APE Eyes |
-| APE | Eyes | Shutter | APE Shutter |
-| HOG | Eyes | Blue Eye | HOG Blue Eye |
-| HOG | Eyes | Gold Laser | HOG Gold Laser |
-| HOG | Eyes | Green Laser | HOG Green Laser |
-| HOG | Eyes | Red Laser H | HOG Red Laser H |
-| HOG | Headwear | Aviation Cap | HOG Aviation Cap |
-| HOG | Headwear | Backwards Cap | HOG Backwards Cap |
-| HOG | Headwear | Chinese Hat | HOG Chinese Hat |
-| HOG | Mouth | Irongrill Hat | HOG Irongrill Hat |
-| HOG | Eyes | Phantom Marauder Mask | HOG Phantom Marauder Mask |
+| APE | Unknown | Eyes | APE Eyes |
+| APE | Unknown | Shutter | APE Shutter |
+| HOG | Unknown | Blue Eye | HOG Blue Eye |
+| HOG | Unknown | Gold Laser | HOG Gold Laser |
+| HOG | Unknown | Green Laser | HOG Green Laser |
+| HOG | Unknown | Red Laser H | HOG Red Laser H |
+| HOG | Unknown | Aviation Cap | HOG Aviation Cap |
+| HOG | Unknown | Backwards Cap | HOG Backwards Cap |
+| HOG | Unknown | Chinese Hat | HOG Chinese Hat |
+| HOG | Unknown | Irongrill Hat | HOG Irongrill Hat |
+| HOG | Unknown | Phantom Marauder Mask | HOG Phantom Marauder Mask |
 | HOG | Unknown | Piercing | HOG Piercing |
-| HOG | Mouth | Moonshard Tusks | HOG Moonshard Tusks |
+| HOG | Unknown | Moonshard Tusks | HOG Moonshard Tusks |
 
 ---
 
@@ -185,82 +132,7 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 
 ## CLOTHES
 
-| Metric | Count |
-|--------|-------|
-| Script.js traits | 93 |
-| CSV traits | 48 |
-| ✅ Matches | 44 |
-| ❌ Missing in script.js | 4 |
-| ❌ Unassociated traits | 49 |
-
-### Missing in script.js
-
-- Blank → Blank (APE Blank)
-- Sailor → Admiral of the Abyss (APE Admiral of the Abyss)
-- Spacesuit → Cosmic Conqueror (APE Cosmic Conqueror)
-- Tie Dye → Nebula Core Tee (APE Nebula Core Tee)
-
-### Unassociated Traits
-
-- APE None
-- APE Sailor
-- APE Tanktop Dark Warrior s Cuirass
-- HOG Abyssal Relic Shroud
-- HOG Arctic Essence Sleeveless Tunic
-- HOG Armory Harness
-- HOG Army General
-- HOG Crimson Shadowweave
-- HOG Crimson Timberjack Flannel
-- HOG Cryptoshade XRP Hoodie
-- HOG Denim Shadowweave Shirt
-- HOG Emberstrapped Penitence Attire
-- HOG Feral Mark T-Shirt
-- HOG FUTURISTIC
-- HOG Harvest Horizon Ensemble
-- HOG Heroic Hog Ensemble
-- HOG HOODIE
-- HOG Infernal Decathlete Jersey
-- HOG Jungle Baynana Tee
-- HOG Jungle Vigilante
-- HOG Midnight Maverick Shirt
-- HOG Midnight Rebel Biker Vest
-- HOG Nebula Vanguard
-- HOG Nexus Cyborg Armor
-- HOG NIrvana Embrace
-- HOG None
-- HOG Nordic Valorweave Attire
-- HOG Obsidian Laboratory Vestments
-- HOG Obsidian Shadow Jacket
-- HOG POLO
-- HOG Regal Blushgown
-- HOG Regal Crimson Mantle
-- HOG SAMURAI 2
-- HOG SAMURAI
-- HOG Scarlet Sentinel 2
-- HOG Scarlet Sentinel
-- HOG Shadow Buccaneer Vest
-- HOG Shadow Monk
-- HOG Shadow Striped
-- HOG Shadow XRP Vanguard Tee
-- HOG Shadowcat Obsidian Robe
-- HOG Shadowguard Futuraarmor
-- HOG Shadowsteel Knight Hauberk
-- HOG Shoulder Strap
-- HOG Solar Tropic Thunder Shirt
-- HOG Stonehide Primalgarb
-- HOG Striped Shadowline Veilshirt
-- HOG Syndicate Suit
-- HOG Twin Seraph Chains
-
-### Sample Matches
-
-1. Admiral → APE Jungle Sovereign
-2. Apelink → APE Apelink
-3. Army → APE Elite Stealth
-4. Baby → APE Red Toddler
-5. Bandolier → APE Desert Raider
-
----
+❌ Trait type 'Clothes' -> 'Clothing' not found in script.js
 
 ## MOUTH
 

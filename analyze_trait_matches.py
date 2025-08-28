@@ -75,30 +75,17 @@ def analyze_matches():
     
     # Compare each trait type
     for trait_type in csv_by_type:
-        # Convert CSV trait type to match script.js format
-        script_trait_type = trait_type.title()
-        if trait_type == "SKIN":
-            script_trait_type = "Skin"
-        elif trait_type == "CLOTHES":
-            script_trait_type = "Clothes"
-        elif trait_type == "MOUTH":
-            script_trait_type = "Mouth"
-        elif trait_type == "EYES":
-            script_trait_type = "Eyes"
-        elif trait_type == "HEADWEAR":
-            script_trait_type = "Headwear"
-        elif trait_type == "TUSKS":
-            script_trait_type = "Tusk"
-        elif trait_type == "Tusks":
-            script_trait_type = "Tusk"
-        elif trait_type == "Clothing":
-            script_trait_type = "Clothes"
-        elif trait_type == "Eyes":
-            script_trait_type = "Eyes"
-        elif trait_type == "Headwear":
-            script_trait_type = "Headwear"
-        elif trait_type == "Mouth":
-            script_trait_type = "Mouth"
+        # Convert trait type names to match script.js
+        type_mapping = {
+            'Skin': 'Skin',
+            'Clothes': 'Clothing', 
+            'Clothing': 'Clothes',  # Map CSV "Clothing" to script.js "Clothes"
+            'Mouth': 'Mouth',
+            'Eyes': 'Eyes',
+            'Headwear': 'Headwear',
+            'Tusk': 'Tusk'
+        }
+        script_trait_type = type_mapping.get(trait_type, trait_type) # Default to trait_type if not in mapping
         
         if script_trait_type not in script_traits:
             continue
@@ -133,7 +120,8 @@ def analyze_matches():
                 missing_in_script.append({
                     'original': csv_row['Original_Trait'],
                     'new': new_trait,
-                    'with_id': new_trait_with_id
+                    'with_id': new_trait_with_id,
+                    'type': trait_type  # Store the trait type from CSV
                 })
         
         # Check for script traits not in CSV
@@ -189,8 +177,8 @@ def analyze_matches():
         for item in all_missing_in_script:
             # Extract collection from the trait name
             collection = "HOG" if item['with_id'].startswith("HOG") else "APE"
-            # Extract trait type from the original trait mapping
-            trait_type = item.get('type', 'Unknown')
+            # Get trait type from the CSV row data
+            trait_type = item['type']
             markdown_content.append(f"| {collection} | {trait_type} | {item['original']} | "
                                   f"{item['with_id']} |")
         markdown_content.append("")
@@ -201,29 +189,13 @@ def analyze_matches():
         markdown_content.append("| Collection | Trait Type | Original Trait | Updated Trait |")
         markdown_content.append("|------------|------------|----------------|---------------|")
         
-        # Create a mapping to determine trait types for unassociated traits
-        trait_type_patterns = {
-            'Skin': ['Skin', 'Hide', 'Fur', 'Scales', 'Armor', 'Glow', 'Frost', 'Flame'],
-            'Clothes': ['Shirt', 'Tee', 'Hoodie', 'Jacket', 'Vest', 'Suit', 'Robe', 'Tunic', 
-                       'Jersey', 'Uniform', 'Garb', 'Attire', 'Ensemble', 'Shroud', 'Mantle'],
-            'Mouth': ['Grill', 'Teeth', 'Pipe', 'Cigar', 'Stick', 'Pop', 'Husk', 'Grille', 
-                     'Maw', 'Scepter', 'Dagger', 'Roll', 'Shard'],
-            'Eyes': ['Eye', 'Laser', 'Shutter', 'Mask', 'Veil', 'Spectra', 'Eclipse', 'Vision'],
-            'Headwear': ['Cap', 'Hat', 'Helmet', 'Beret', 'Mask', 'Crown', 'Hood', 'Bandana'],
-            'Tusk': ['Tusk', 'Fang', 'Bone', 'Spine', 'Nest']
-        }
-        
         for trait in all_unassociated:
             # Extract collection from the trait name
             collection = "HOG" if trait.startswith("HOG") else "APE"
             
-            # Determine trait type based on naming patterns
+            # For unassociated traits, we need to determine trait type from context
+            # This would require additional logic or manual mapping
             trait_type = "Unknown"
-            trait_lower = trait.lower()
-            for type_name, patterns in trait_type_patterns.items():
-                if any(pattern.lower() in trait_lower for pattern in patterns):
-                    trait_type = type_name
-                    break
             
             # Extract original trait name (remove collection prefix)
             original_trait = trait.replace("HOG ", "").replace("APE ", "")
@@ -239,30 +211,17 @@ def analyze_matches():
         markdown_content.append(f"## {trait_type.upper()}")
         markdown_content.append("")
         
-        # Convert CSV trait type to match script.js format
-        script_trait_type = trait_type.title()
-        if trait_type == "SKIN":
-            script_trait_type = "Skin"
-        elif trait_type == "CLOTHES":
-            script_trait_type = "Clothes"
-        elif trait_type == "MOUTH":
-            script_trait_type = "Mouth"
-        elif trait_type == "EYES":
-            script_trait_type = "Eyes"
-        elif trait_type == "HEADWEAR":
-            script_trait_type = "Headwear"
-        elif trait_type == "TUSKS":
-            script_trait_type = "Tusk"
-        elif trait_type == "Tusks":
-            script_trait_type = "Tusk"
-        elif trait_type == "Clothing":
-            script_trait_type = "Clothes"
-        elif trait_type == "Eyes":
-            script_trait_type = "Eyes"
-        elif trait_type == "Headwear":
-            script_trait_type = "Headwear"
-        elif trait_type == "Mouth":
-            script_trait_type = "Mouth"
+        # Convert trait type names to match script.js
+        type_mapping = {
+            'Skin': 'Skin',
+            'Clothes': 'Clothing', 
+            'Clothing': 'Clothes',  # Map CSV "Clothing" to script.js "Clothes"
+            'Mouth': 'Mouth',
+            'Eyes': 'Eyes',
+            'Headwear': 'Headwear',
+            'Tusk': 'Tusk'
+        }
+        script_trait_type = type_mapping.get(trait_type, trait_type) # Default to trait_type if not in mapping
         
         if script_trait_type not in script_traits:
             msg = f"❌ Trait type '{trait_type}' -> '{script_trait_type}' "
