@@ -138,6 +138,8 @@ function getTraitManifest() {
     "APE XRP Cryptowear Hoodie.png",
     "APE Dread Captain's Regalia.png",
     "APE Dark Warrior's Cuirass.png",
+    "APE Riot Commander.png",
+    "APE Escape Artist's Mark.png",
     "APE Speculator's Shackle.png",
     "APE Crypt Guardian.png",
     "APE Diner's Champion.png",
@@ -186,8 +188,7 @@ function getTraitManifest() {
     "HOG Stonehide Primalgarb.png",
     "HOG Striped Shadowline Veilshirt.png",
     "HOG Syndicate Suit.png",
-    "HOG Twin Seraph Chains.png",
-    "APE Riot Commander.png"
+    "HOG Twin Seraph Chains.png"
   ],
   "Mouth": [
     "APE Abyssal Shine Grill.png",
