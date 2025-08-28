@@ -6,6 +6,12 @@ Output results to trait-matching.md in markdown format
 
 import csv
 import re
+from difflib import SequenceMatcher
+
+
+def similarity_score(a, b):
+    """Calculate similarity score between two strings"""
+    return SequenceMatcher(None, a.lower(), b.lower()).ratio()
 
 
 def extract_trait_names_from_script():
@@ -174,11 +180,31 @@ def analyze_matches():
         markdown_content.append("")
         markdown_content.append("| Collection | Trait Type | Original Trait | Updated Trait |")
         markdown_content.append("|------------|------------|----------------|---------------|")
+        
+        # Find best matches for missing items
         for item in all_missing_in_script:
             # Extract collection from the trait name
             collection = "HOG" if item['with_id'].startswith("HOG") else "APE"
-            # Get trait type from the CSV row data
             trait_type = item['type']
+            
+            # Find the best match from script.js traits of the SAME TYPE
+            best_match = None
+            best_score = 0
+            
+            # Get the corresponding script trait type
+            script_trait_type = type_mapping.get(trait_type, trait_type)
+            if script_trait_type in script_traits:
+                script_trait_names = script_traits[script_trait_type]
+                
+                for script_trait in script_trait_names:
+                    score = similarity_score(item['with_id'], script_trait)
+                    if score > best_score:
+                        best_score = score
+                        best_match = script_trait
+            
+            likely_match = best_match if best_match else "None found"
+            chance_percent = f"{best_score * 100:.1f}%" if best_match else "0%"
+            
             markdown_content.append(f"| {collection} | {trait_type} | {item['original']} | "
                                   f"{item['with_id']} |")
         markdown_content.append("")
@@ -196,6 +222,37 @@ def analyze_matches():
             # For unassociated traits, we need to determine trait type from context
             # This would require additional logic or manual mapping
             trait_type = "Unknown"
+            
+            # Find the best match from CSV traits of the SAME TYPE
+            best_match = None
+            best_score = 0
+            
+            # Try to determine trait type from naming patterns first
+            trait_lower = trait.lower()
+            if any(word in trait_lower for word in ['shirt', 'tee', 'hoodie', 'jacket', 'vest', 'suit', 'robe', 'tunic', 'jersey', 'uniform', 'garb', 'attire', 'ensemble', 'shroud', 'mantle']):
+                trait_type = "Clothing"
+            elif any(word in trait_lower for word in ['skin', 'hide', 'fur', 'scales', 'armor', 'glow', 'frost', 'flame']):
+                trait_type = "Skin"
+            elif any(word in trait_lower for word in ['grill', 'teeth', 'pipe', 'cigar', 'stick', 'pop', 'husk', 'grille', 'maw', 'scepter', 'dagger', 'roll', 'shard']):
+                trait_type = "Mouth"
+            elif any(word in trait_lower for word in ['eye', 'laser', 'shutter', 'mask', 'veil', 'spectra', 'eclipse', 'vision']):
+                trait_type = "Eyes"
+            elif any(word in trait_lower for word in ['cap', 'hat', 'helmet', 'beret', 'mask', 'crown', 'hood', 'bandana']):
+                trait_type = "Headwear"
+            elif any(word in trait_lower for word in ['tusk', 'fang', 'bone', 'spine', 'nest']):
+                trait_type = "Tusk"
+            
+            # Only compare with CSV traits of the same type
+            for csv_row in csv_data:
+                if csv_row['Trait_Type'] == trait_type:
+                    csv_trait = csv_row['New_Trait_w_ID']
+                    score = similarity_score(trait, csv_trait)
+                    if score > best_score:
+                        best_score = score
+                        best_match = csv_row['Original_Trait']
+            
+            likely_match = best_match if best_match else "None found"
+            chance_percent = f"{best_score * 100:.1f}%" if best_match else "0%"
             
             # Extract original trait name (remove collection prefix)
             original_trait = trait.replace("HOG ", "").replace("APE ", "")

@@ -82,7 +82,7 @@ Mouth,Diamond Grill,Abyssal Shine Grill,APE Abyssal Shine Grill
 Mouth,Donut,Ravaged Donut,APE Ravaged Donut
 Mouth,Gold Grill,Sovereign Fang Grill,APE Sovereign Fang Grill
 Mouth,Happy,Happy,APE Happy
-Mouth,Hotdog,Inferno Hotdog,APE Inferno Hotdog
+Mouth,Hotdog,Inferno Hot Dog,APE Inferno Hot Dog
 Mouth,Ledger,Bite-Sec Ledger,APE Bite-Sec Ledger
 Mouth,Multicolor Grill,Prismatic Bite,APE Prismatic Bite
 Mouth,No Expression,No Expression,APE No Expression
@@ -123,7 +123,7 @@ Eyes,Sad,Sad,APE Sad
 Eyes,Scar,Scar,APE Scar
 Eyes,Scared,Scared,APE Scared
 Eyes,Shocked,Shocked,APE Shocked
-Eyes,Shutter,Crimson Razor Shutters,APE Crimson Razor Shutters
+Eyes,Shutter,Shutter,APE Shutter
 Eyes,Shy,Shy,APE Shy
 Eyes,Stoned,Stoned,APE Stoned
 Eyes,Tattoo,Tattoo,APE Tattoo
@@ -137,7 +137,7 @@ Headwear,Bandana,Rugged Jungle Bandana,APE Rugged Jungle Bandana
 Headwear,Beanie,Darkforce Beanie,APE Darkforce Beanie
 Headwear,Beanie Cap,Shadow XRP Overcap,APE Shadow XRP Overcap
 Headwear,Beret,Warrior's Shadow Beret,APE Warrior's Shadow Beret
-Headwear,Blank,Blank,APE Blank
+Headwear,Blank,None,APE None
 Headwear,Bucket Hat,Storm Surge Bucker Hat,APE Storm Surge Bucker Hat
 Headwear,Bunny Ears,Night Prowler Ears,APE Night Prowler Ears
 Headwear,Chef Hat,Culinary Warlord's Hat,APE Culinary Warlord's Hat
@@ -187,7 +187,7 @@ Skin,Camo,Shadowstrike Commando,HOG Shadowstrike Commando
 Skin,Tigershark,Obsidianfin Tigershadow,HOG Obsidian Tigershadow
 Skin,Cyborg,Cybershadow ,HOG Cybershadow
 Skin,Orange,Junglesworn Scar,HOG Jungleworn Scar
-Skin,Diamond,Abyssal Diamondglow,HOG Abyssal Diamondglow
+Skin,Diamond,Abyssal Glow,HOG Abyssal Glow
 Skin,Snowleopard,Frostshadow Leopard,HOG Frostshadow Leopard
 Skin,White,Luminarctic Frostweave,HOG Luminarctic Frostweave
 Skin,Cow,Duskfang Bovine Hide,HOG Duskfang Bovine Hide
@@ -272,7 +272,7 @@ Eyes,Hypno,Void Spiral Lenses,HOG Void Spiral Lenses
 Eyes,Sleepy,Sleepy H,HOG Sleepy H
 Eyes,Harley,Voidstrike Shades,HOG Voidstrike Shades
 Eyes,Future,Eclipse Vision,HOG Eclipse Vision
-Eyes,Red laser,Red laser H,HOG Red laser H
+Eyes,Red laser,Red Laser H,HOG Red Laser H
 Eyes,Thuglife,Thug Shadow,HOG Thug Shadow
 Eyes,Blue laser,Blue Laser H,HOG Blue Laser H
 Headwear,Backwards Cap,Backwards Bloodshade Raider Cap,HOG Backwards Bloodshade Raider Cap
@@ -310,7 +310,7 @@ Headwear,Police,Hog Enforcer Cap?,HOG Enforcer Cap
 Headwear,Beret,Shadowspire Beret,HOG Shadowspire Beret
 Headwear,Nightvision,Gravelight Optics,HOG Gravelight Optics
 Mouth,Closed,Closed H,HOG Closed H
-Mouth,Pizza,Infernapep Slice,HOG Infernapep Slice
+Mouth,Pizza,Apocalyptic Slice,HOG Apocalyptic Slice
 Mouth,Angry,Angry H,HOG Angry H
 Mouth,Dynamite,Blazestick,HOG Blazestick
 Mouth,Zombie,Zombie H,HOG Zombie

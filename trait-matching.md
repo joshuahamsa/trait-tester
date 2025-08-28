@@ -8,9 +8,9 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 |--------|-------|
 | Total Script.js traits | 327 |
 | Total CSV traits | 302 |
-| ✅ Found matches | 250 |
-| ❌ Missing in script.js | 52 |
-| ❌ Unassociated traits | 21 |
+| ✅ Found matches | 256 |
+| ❌ Missing in script.js | 46 |
+| ❌ Unassociated traits | 18 |
 
 ### All Missing in Script.js (Need Artist Tickets)
 
@@ -18,15 +18,12 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 |------------|------------|----------------|---------------|
 | HOG | Skin | Normal | HOG Normal |
 | HOG | Skin | Black | HOG Fire from Apes |
-| HOG | Skin | Diamond | HOG Abyssal Diamondglow |
 | HOG | Skin | Cow | HOG Duskfang Bovine Hide |
 | HOG | Skin | Blue | HOG Obsidian Azure Spikes |
 | APE | Mouth | Bubble | APE Thorn-Infused Jungle Gum |
 | APE | Mouth | Donut | APE Ravaged Donut |
-| APE | Mouth | Hotdog | APE Inferno Hotdog |
 | APE | Mouth | Rainbow | APE Rainbow Spheres |
 | HOG | Mouth | Closed | HOG Closed H |
-| HOG | Mouth | Pizza | HOG Infernapep Slice |
 | HOG | Mouth | Angry | HOG Angry H |
 | HOG | Mouth | Dynamite | HOG Blazestick |
 | HOG | Mouth | Sad | HOG Sad H |
@@ -44,14 +41,11 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 | HOG | Mouth | Cigarette | HOG Ashvein Stick |
 | HOG | Mouth | Diamond Teeth | HOG Shatterbite Grille |
 | APE | Eyes | Cyborg | APE Dominition Warfare |
-| APE | Eyes | Shutter | APE Crimson Razor Shutters |
 | HOG | Eyes | Blue eye | HOG Blue eye |
 | HOG | Eyes | Happy | HOG Happy H |
 | HOG | Eyes | Egg | HOG Mutated Omelette |
 | HOG | Eyes | Pierceing | HOG Piercing |
 | HOG | Eyes | Highwayman Mask | HOG Veil of Ashrift |
-| HOG | Eyes | Red laser | HOG Red laser H |
-| APE | Headwear | Blank | APE Blank |
 | HOG | Headwear | Backwards Cap | HOG Backwards Bloodshade Raider Cap |
 | HOG | Headwear | Chinese Hat | HOG Obsidian Fang War Hat |
 | HOG | Headwear | McHog | HOG Zombie |
@@ -75,25 +69,22 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 |------------|------------|----------------|---------------|
 | HOG | Unknown | Azure Spikes | HOG Azure Spikes |
 | HOG | Unknown | TBD | HOG TBD |
-| APE | Unknown | Inferno Hot Dog | APE Inferno Hot Dog |
 | APE | Unknown | Prism Jaw | APE Prism Jaw |
 | HOG | Unknown | angry | HOG angry |
 | HOG | Unknown | Close | HOG Close |
 | HOG | Unknown | Grin | HOG Grin |
 | HOG | Unknown | Rainbow Puke | HOG Rainbow Puke |
-| APE | Unknown | Eyes | APE Eyes |
-| APE | Unknown | Shutter | APE Shutter |
-| HOG | Unknown | Blue Eye | HOG Blue Eye |
-| HOG | Unknown | Gold Laser | HOG Gold Laser |
-| HOG | Unknown | Green Laser | HOG Green Laser |
-| HOG | Unknown | Red Laser H | HOG Red Laser H |
-| HOG | Unknown | Aviation Cap | HOG Aviation Cap |
-| HOG | Unknown | Backwards Cap | HOG Backwards Cap |
-| HOG | Unknown | Chinese Hat | HOG Chinese Hat |
-| HOG | Unknown | Irongrill Hat | HOG Irongrill Hat |
-| HOG | Unknown | Phantom Marauder Mask | HOG Phantom Marauder Mask |
+| APE | Eyes | Eyes | APE Eyes |
+| HOG | Eyes | Blue Eye | HOG Blue Eye |
+| HOG | Eyes | Gold Laser | HOG Gold Laser |
+| HOG | Eyes | Green Laser | HOG Green Laser |
+| HOG | Headwear | Aviation Cap | HOG Aviation Cap |
+| HOG | Headwear | Backwards Cap | HOG Backwards Cap |
+| HOG | Headwear | Chinese Hat | HOG Chinese Hat |
+| HOG | Mouth | Irongrill Hat | HOG Irongrill Hat |
+| HOG | Eyes | Phantom Marauder Mask | HOG Phantom Marauder Mask |
 | HOG | Unknown | Piercing | HOG Piercing |
-| HOG | Unknown | Moonshard Tusks | HOG Moonshard Tusks |
+| HOG | Mouth | Moonshard Tusks | HOG Moonshard Tusks |
 
 ---
 
@@ -103,15 +94,14 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 |--------|-------|
 | Script.js traits | 42 |
 | CSV traits | 45 |
-| ✅ Matches | 40 |
-| ❌ Missing in script.js | 5 |
+| ✅ Matches | 41 |
+| ❌ Missing in script.js | 4 |
 | ❌ Unassociated traits | 2 |
 
 ### Missing in script.js
 
 - Normal → Normal (HOG Normal)
 - Black → Fire from Apes (HOG Fire from Apes)
-- Diamond → Abyssal Diamondglow (HOG Abyssal Diamondglow)
 - Cow → Duskfang Bovine Hide (HOG Duskfang Bovine Hide)
 - Blue → Obsidian Azure Spikes (HOG Obsidian Azure Spikes)
 
@@ -140,18 +130,16 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 |--------|-------|
 | Script.js traits | 42 |
 | CSV traits | 57 |
-| ✅ Matches | 35 |
-| ❌ Missing in script.js | 22 |
-| ❌ Unassociated traits | 6 |
+| ✅ Matches | 37 |
+| ❌ Missing in script.js | 20 |
+| ❌ Unassociated traits | 5 |
 
 ### Missing in script.js
 
 - Bubble → Thorn-Infused Jungle Gum (APE Thorn-Infused Jungle Gum)
 - Donut → Ravaged Donut (APE Ravaged Donut)
-- Hotdog → Inferno Hotdog (APE Inferno Hotdog)
 - Rainbow → Rainbow Spheres (APE Rainbow Spheres)
 - Closed → Closed H (HOG Closed H)
-- Pizza → Infernapep Slice (HOG Infernapep Slice)
 - Angry → Angry H (HOG Angry H)
 - Dynamite → Blazestick (HOG Blazestick)
 - Sad → Sad H (HOG Sad H)
@@ -171,7 +159,6 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 
 ### Unassociated Traits
 
-- APE Inferno Hot Dog
 - APE Prism Jaw
 - HOG angry
 - HOG Close
@@ -194,29 +181,25 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 |--------|-------|
 | Script.js traits | 57 |
 | CSV traits | 59 |
-| ✅ Matches | 51 |
-| ❌ Missing in script.js | 8 |
-| ❌ Unassociated traits | 6 |
+| ✅ Matches | 53 |
+| ❌ Missing in script.js | 6 |
+| ❌ Unassociated traits | 4 |
 
 ### Missing in script.js
 
 - Cyborg → Dominition Warfare (APE Dominition Warfare)
-- Shutter → Crimson Razor Shutters (APE Crimson Razor Shutters)
 - Blue eye → Blue eye (HOG Blue eye)
 - Happy → Happy H (HOG Happy H)
 - Egg → Mutated Omelette (HOG Mutated Omelette)
 - Pierceing → Piercing (HOG Piercing)
 - Highwayman Mask → Veil of Ashrift (HOG Veil of Ashrift)
-- Red laser → Red laser H (HOG Red laser H)
 
 ### Unassociated Traits
 
 - APE Eyes
-- APE Shutter
 - HOG Blue Eye
 - HOG Gold Laser
 - HOG Green Laser
-- HOG Red Laser H
 
 ### Sample Matches
 
@@ -234,13 +217,12 @@ This document analyzes the matching between traits in `script.js` and the CSV fi
 |--------|-------|
 | Script.js traits | 78 |
 | CSV traits | 78 |
-| ✅ Matches | 72 |
-| ❌ Missing in script.js | 6 |
+| ✅ Matches | 73 |
+| ❌ Missing in script.js | 5 |
 | ❌ Unassociated traits | 6 |
 
 ### Missing in script.js
 
-- Blank → Blank (APE Blank)
 - Backwards Cap → Backwards Bloodshade Raider Cap (HOG Backwards Bloodshade Raider Cap)
 - Chinese Hat → Obsidian Fang War Hat (HOG Obsidian Fang War Hat)
 - McHog → Zombie (HOG Zombie)

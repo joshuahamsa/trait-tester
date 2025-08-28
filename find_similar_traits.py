@@ -8,6 +8,10 @@ import csv
 import re
 from difflib import SequenceMatcher
 
+# CONFIGURABLE THRESHOLDS
+SIMILARITY_THRESHOLD = 0.7  # Minimum score to show as potential match
+HIGH_CONFIDENCE_THRESHOLD = 0.5  # Score above which to offer updates
+
 
 def extract_trait_names_from_script():
     """Extract trait names from script.js manifest"""
@@ -71,6 +75,10 @@ def is_spacing_only_difference(str1, str2):
 
 def fix_spacing(str1, str2):
     """Return str1 with spacing corrected to match str2"""
+    # If they're already the same, return str2
+    if str1 == str2:
+        return str2
+    
     # Split both strings into words
     words1 = str1.split()
     words2 = str2.split()
@@ -101,12 +109,11 @@ def find_similar_traits():
     # Convert trait type names to match script.js
     type_mapping = {
         'Skin': 'Skin',
-        'Clothes': 'Clothes', 
+        'Clothing': 'Clothing', 
         'Mouth': 'Mouth',
         'Eyes': 'Eyes',
         'Headwear': 'Headwear',
-        'Tusk': 'Tusk',
-        'Clothing': 'Clothes'  # HOG clothing maps to Clothes
+        'Tusk': 'Tusk'
     }
     
     potential_matches = []
@@ -127,17 +134,18 @@ def find_similar_traits():
             new_trait_with_id = csv_row['New_Trait_w_ID']
             original_trait = csv_row['Original_Trait']
             
-            # Check for exact matches first
+            # Check for exact matches first (using partial string matching like analyze script)
             exact_match = None
             for script_trait in script_trait_names:
-                if new_trait == script_trait or new_trait_with_id == script_trait:
+                if (new_trait in script_trait or 
+                    new_trait_with_id in script_trait):
                     exact_match = script_trait
                     break
             
             if exact_match:
                 continue  # Skip if exact match found
             
-            # Find similar traits
+            # Find similar traits using fuzzy matching for non-exact matches
             similarities = []
             for script_trait in script_trait_names:
                 # Check similarity with both new_trait and new_trait_with_id
@@ -145,7 +153,7 @@ def find_similar_traits():
                 score2 = similarity_score(new_trait_with_id, script_trait)
                 score = max(score1, score2)
                 
-                if score > 0.7:  # Threshold for potential match
+                if score > SIMILARITY_THRESHOLD:  # Threshold for potential match
                     similarities.append({
                         'script_trait': script_trait,
                         'score': score,
@@ -178,14 +186,18 @@ def find_similar_traits():
                                            best_match['script_trait']):
                     fixed_spacing = fix_spacing(best_match['csv_trait'], 
                                               best_match['script_trait'])
-                    spacing_fixes.append({
-                        'csv_row': best_match['csv_row'],
-                        'old_value': best_match['csv_trait'],
-                        'new_value': fixed_spacing,
-                        'script_value': best_match['script_trait']
-                    })
-                    print(f"  🔧 AUTO-FIX: Spacing corrected to '{fixed_spacing}'")
-                elif best_match['score'] > 0.9:  # High confidence match
+                    # Only apply fix if there's actually a difference
+                    if fixed_spacing != best_match['csv_trait']:
+                        spacing_fixes.append({
+                            'csv_row': best_match['csv_row'],
+                            'old_value': best_match['csv_trait'],
+                            'new_value': fixed_spacing,
+                            'script_value': best_match['script_trait']
+                        })
+                        print(f"  🔧 AUTO-FIX: Spacing corrected to '{fixed_spacing}'")
+                    else:
+                        print(f"  ✅ Already correct: '{best_match['csv_trait']}'")
+                elif best_match['score'] > HIGH_CONFIDENCE_THRESHOLD:  # High confidence match
                     csv_updates.append({
                         'csv_row': best_match['csv_row'],
                         'old_value': best_match['csv_trait'],
@@ -210,24 +222,45 @@ def find_similar_traits():
     # Offer interactive updates for high-confidence matches
     if csv_updates:
         print("=== HIGH-CONFIDENCE MATCHES ===")
-        print("These traits have >90% similarity. Update CSV to match script.js?")
+        print("These traits have >90% similarity. Choose update method:")
+        print("1. Update all automatically")
+        print("2. Choose individually")
+        print("3. Skip all updates")
         print()
         
-        for i, update in enumerate(csv_updates, 1):
-            print(f"{i}. {update['old_value']} → {update['new_value']} (Score: {update['score']:.2f})")
+        choice = input("Enter choice (1/2/3): ").strip()
         
-        print()
-        response = input("Update all? (y/n): ").lower().strip()
-        
-        if response in ['y', 'yes']:
+        if choice == "1":
+            # Update all automatically
             for update in csv_updates:
                 update['csv_row']['New_Trait_w_ID'] = update['new_value']
                 print(f"  Updated: '{update['old_value']}' → '{update['new_value']}'")
             
             save_csv_data(csv_data)
             print(f"  ✅ Applied {len(csv_updates)} updates to CSV")
+            
+        elif choice == "2":
+            # Choose individually
+            updates_applied = 0
+            for i, update in enumerate(csv_updates, 1):
+                print(f"\n{i}. {update['old_value']} → {update['new_value']} (Score: {update['score']:.2f})")
+                response = input("Update this one? (y/n): ").lower().strip()
+                
+                if response in ['y', 'yes']:
+                    update['csv_row']['New_Trait_w_ID'] = update['new_value']
+                    print(f"  ✅ Updated: '{update['old_value']}' → '{update['new_value']}'")
+                    updates_applied += 1
+                else:
+                    print(f"  ⏭️  Skipped: '{update['old_value']}'")
+            
+            if updates_applied > 0:
+                save_csv_data(csv_data)
+                print(f"\n✅ Applied {updates_applied} updates to CSV")
+            else:
+                print("\n⏭️  No updates applied")
+                
         else:
-            print("  ⏭️  Skipped updates")
+            print("  ⏭️  Skipped all updates")
     
     # Write potential matches to a file for easy review
     with open('potential_trait_matches.txt', 'w') as f:
