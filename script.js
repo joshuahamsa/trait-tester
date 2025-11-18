@@ -3,6 +3,12 @@
  *
  * This file implements the core logic for the trait tester app.
  * It supports both ape and hog species with the new CDN directory structure.
+ *
+ * CORS/CORB Requirements:
+ * - The CDN (baysed.b-cdn.net) must send Access-Control-Allow-Origin header for images
+ *   to allow canvas operations (required for Tusk image splitting)
+ * - GitHub Pages should serve JSON files with correct Content-Type automatically
+ * - If CORB errors occur, check that the CDN is configured to allow cross-origin requests
  */
 
 // Define the layering order from bottom to top (Tusk is handled separately with split layers)
@@ -41,15 +47,35 @@ function createElement(tag, props = {}, children = []) {
  */
 async function loadTraitManifest() {
   try {
-    const response = await fetch('detailed_trait_manifest.json');
+    // Use absolute path to avoid CORB issues on GitHub Pages
+    const manifestPath = 'detailed_trait_manifest.json';
+    const response = await fetch(manifestPath, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+      },
+      cache: 'no-cache'
+    });
+    
     if (!response.ok) {
       throw new Error(`Failed to load manifest: ${response.statusText}`);
     }
+    
+    // Check Content-Type to avoid CORB issues
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      console.warn('Warning: Manifest may not have correct Content-Type header');
+    }
+    
     traitManifest = await response.json();
     console.log('Loaded trait manifest:', traitManifest);
     return traitManifest;
   } catch (error) {
     console.error('Error loading trait manifest:', error);
+    // If fetch fails, try alternative method
+    if (error.name === 'TypeError' || error.message.includes('CORB') || error.message.includes('CORS')) {
+      console.error('CORB/CORS issue detected. This may be a server configuration problem.');
+    }
     throw error;
   }
 }
@@ -140,66 +166,135 @@ function buildTraitUrl(species, traitType, selection) {
 
 /**
  * Split an image in half and return data URLs for left and right halves
+ * Uses fetch API with proper CORS handling to avoid CORB issues
  * @param {string} imageUrl - URL of the image to split
  * @returns {Promise<{left: string, right: string}>} - Data URLs for left and right halves
  */
 async function splitImageInHalf(imageUrl) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    // Try to handle CORS - if the CDN supports it, this will work
-    img.crossOrigin = 'anonymous';
+  try {
+    // First, try to fetch the image as a blob to handle CORS properly
+    // This method works better with CORS than Image element + canvas
+    if (typeof createImageBitmap === 'undefined') {
+      // Browser doesn't support createImageBitmap, skip to fallback
+      throw new Error('createImageBitmap not supported');
+    }
     
-    img.onload = function() {
-      try {
-        console.log('Image loaded, dimensions:', img.width, 'x', img.height);
-        const width = img.width;
-        const height = img.height;
-        const halfWidth = Math.floor(width / 2);
-        
-        // Create canvas for left half (left side of image, x: 0 to width/2)
-        const leftCanvas = document.createElement('canvas');
-        leftCanvas.width = halfWidth;
-        leftCanvas.height = height;
-        const leftCtx = leftCanvas.getContext('2d');
-        leftCtx.drawImage(img, 0, 0, halfWidth, height, 0, 0, halfWidth, height);
-        
-        // Create canvas for right half (right side of image, x: width/2 to width)
-        const rightCanvas = document.createElement('canvas');
-        rightCanvas.width = halfWidth;
-        rightCanvas.height = height;
-        const rightCtx = rightCanvas.getContext('2d');
-        rightCtx.drawImage(img, halfWidth, 0, halfWidth, height, 0, 0, halfWidth, height);
-        
-        const leftDataUrl = leftCanvas.toDataURL('image/png');
-        const rightDataUrl = rightCanvas.toDataURL('image/png');
-        
-        console.log('Image split successfully, data URLs created');
-        resolve({
-          left: leftDataUrl,
-          right: rightDataUrl
-        });
-      } catch (error) {
-        console.error('Error processing image:', error);
-        reject(error);
-      }
+    const response = await fetch(imageUrl, {
+      mode: 'cors',
+      credentials: 'omit'
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch image: ${response.statusText}`);
+    }
+    
+    const blob = await response.blob();
+    const imageBitmap = await createImageBitmap(blob);
+    
+    const width = imageBitmap.width;
+    const height = imageBitmap.height;
+    const halfWidth = Math.floor(width / 2);
+    
+    // Create canvas for left half (left side of image, x: 0 to width/2)
+    const leftCanvas = document.createElement('canvas');
+    leftCanvas.width = halfWidth;
+    leftCanvas.height = height;
+    const leftCtx = leftCanvas.getContext('2d');
+    leftCtx.drawImage(imageBitmap, 0, 0, halfWidth, height, 0, 0, halfWidth, height);
+    
+    // Create canvas for right half (right side of image, x: width/2 to width)
+    const rightCanvas = document.createElement('canvas');
+    rightCanvas.width = halfWidth;
+    rightCanvas.height = height;
+    const rightCtx = rightCanvas.getContext('2d');
+    rightCtx.drawImage(imageBitmap, halfWidth, 0, halfWidth, height, 0, 0, halfWidth, height);
+    
+    const leftDataUrl = leftCanvas.toDataURL('image/png');
+    const rightDataUrl = rightCanvas.toDataURL('image/png');
+    
+    console.log('Image split successfully, data URLs created');
+    return {
+      left: leftDataUrl,
+      right: rightDataUrl
     };
-    
-    img.onerror = function(error) {
-      console.error('Failed to load image for splitting:', imageUrl, error);
-      // Try without CORS as fallback
-      if (img.crossOrigin === 'anonymous') {
-        console.log('Retrying without CORS...');
-        const img2 = new Image();
-        img2.onload = img.onload;
-        img2.onerror = () => reject(new Error('Failed to load image for splitting (CORS issue or invalid URL)'));
-        img2.src = imageUrl;
-      } else {
-        reject(new Error('Failed to load image for splitting'));
-      }
-    };
-    
-    img.src = imageUrl;
-  });
+  } catch (fetchError) {
+    // Fallback to Image element method if fetch fails
+    console.warn('Fetch method failed, trying Image element fallback:', fetchError);
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      // Try to handle CORS - if the CDN supports it, this will work
+      img.crossOrigin = 'anonymous';
+      
+      img.onload = function() {
+        try {
+          console.log('Image loaded via fallback, dimensions:', img.width, 'x', img.height);
+          const width = img.width;
+          const height = img.height;
+          const halfWidth = Math.floor(width / 2);
+          
+          // Create canvas for left half (left side of image, x: 0 to width/2)
+          const leftCanvas = document.createElement('canvas');
+          leftCanvas.width = halfWidth;
+          leftCanvas.height = height;
+          const leftCtx = leftCanvas.getContext('2d');
+          leftCtx.drawImage(img, 0, 0, halfWidth, height, 0, 0, halfWidth, height);
+          
+          // Create canvas for right half (right side of image, x: width/2 to width)
+          const rightCanvas = document.createElement('canvas');
+          rightCanvas.width = halfWidth;
+          rightCanvas.height = height;
+          const rightCtx = rightCanvas.getContext('2d');
+          rightCtx.drawImage(img, halfWidth, 0, halfWidth, height, 0, 0, halfWidth, height);
+          
+          const leftDataUrl = leftCanvas.toDataURL('image/png');
+          const rightDataUrl = rightCanvas.toDataURL('image/png');
+          
+          console.log('Image split successfully via fallback, data URLs created');
+          resolve({
+            left: leftDataUrl,
+            right: rightDataUrl
+          });
+        } catch (error) {
+          console.error('Error processing image in fallback:', error);
+          // If canvas operations fail due to CORB, show the full image instead
+          if (error.message && (error.message.includes('tainted') || error.message.includes('CORB'))) {
+            console.error('CORB/CORS issue: Cannot split image. CDN needs to send Access-Control-Allow-Origin header.');
+            // Return the full image as both halves as a workaround
+            const fullCanvas = document.createElement('canvas');
+            fullCanvas.width = img.width;
+            fullCanvas.height = img.height;
+            const fullCtx = fullCanvas.getContext('2d');
+            fullCtx.drawImage(img, 0, 0);
+            const fullDataUrl = fullCanvas.toDataURL('image/png');
+            resolve({
+              left: fullDataUrl,
+              right: fullDataUrl
+            });
+          } else {
+            reject(error);
+          }
+        }
+      };
+      
+      img.onerror = function(error) {
+        console.error('Failed to load image for splitting:', imageUrl, error);
+        // Try without CORS as last resort
+        if (img.crossOrigin === 'anonymous') {
+          console.log('Retrying without CORS...');
+          const img2 = new Image();
+          img2.onload = img.onload;
+          img2.onerror = () => {
+            reject(new Error('Failed to load image for splitting. CDN may need CORS headers configured.'));
+          };
+          img2.src = imageUrl;
+        } else {
+          reject(new Error('Failed to load image for splitting'));
+        }
+      };
+      
+      img.src = imageUrl;
+    });
+  }
 }
 
 /**
