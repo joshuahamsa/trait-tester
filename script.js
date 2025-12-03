@@ -707,8 +707,8 @@ function buildUI(species) {
     preview.appendChild(img);
     layerIndex++;
     
-    // Add Tusk-Left layer after Mouth (above Mouth)
-    if (trait === 'Mouth') {
+    // Add Tusk-Left layer after Eyes (above Eyes)
+    if (trait === 'Eyes') {
       // Add Tusk-Left layer (left half, right side of image)
       const hasTusk = speciesData['Tusk'] || (traitManifest[species] && traitManifest[species]['Tusk']);
       if (hasTusk) {
