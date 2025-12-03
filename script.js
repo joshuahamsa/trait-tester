@@ -159,9 +159,9 @@ function buildTraitUrl(species, traitType, selection) {
   if (!selection || selection === 'None' || selection === '') {
     return null;
   }
-  
+
   // For simple traits, the selection is the filename
-  return `${CDN_BASE}/${species}/${traitType}/${selection}`;
+  return `${CDN_BASE}/${species}/${traitType}/${encodeURIComponent(selection)}`;
 }
 
 /**
@@ -365,7 +365,7 @@ function updateBaseMouth() {
     });
     
     if (matchingBase) {
-      baseMouthImg.src = `${CDN_BASE}/${currentSpecies}/Mouth/Base/${matchingBase}`;
+      baseMouthImg.src = `${CDN_BASE}/${currentSpecies}/Mouth/Base/${encodeURIComponent(matchingBase)}`;
       baseMouthImg.style.display = 'block';
       return;
     }
@@ -421,17 +421,17 @@ function updateTrait(traitType, selection) {
       if (mouthType === '_direct') {
         // For _direct mouths, tusks are in the root Tusk directory
         tuskImageUrl = `${CDN_BASE}/${currentSpecies}/${traitType}/${tuskFilename}`;
-      } else if (tuskData[mouthType] && Array.isArray(tuskData[mouthType])) {
+      } else       if (tuskData[mouthType] && Array.isArray(tuskData[mouthType])) {
         // Mouth-dependent tusk: hog/Tusk/[mouthType]/[filename].png
-        tuskImageUrl = `${CDN_BASE}/${currentSpecies}/${traitType}/${mouthType}/${tuskFilename}`;
+        tuskImageUrl = `${CDN_BASE}/${currentSpecies}/${traitType}/${encodeURIComponent(mouthType)}/${encodeURIComponent(tuskFilename)}`;
       } else {
         // Fall back to root path for mouth types that don't have specific Tusk options
         // These use _direct Tusk options from the manifest, but files are in root directory
-        tuskImageUrl = `${CDN_BASE}/${currentSpecies}/${traitType}/${tuskFilename}`;
+        tuskImageUrl = `${CDN_BASE}/${currentSpecies}/${traitType}/${encodeURIComponent(tuskFilename)}`;
       }
     } else {
       // Simple Tusk (ape) - direct path
-      tuskImageUrl = `${CDN_BASE}/${currentSpecies}/${traitType}/${tuskFilename}`;
+      tuskImageUrl = `${CDN_BASE}/${currentSpecies}/${traitType}/${encodeURIComponent(tuskFilename)}`;
     }
     
     // Split the image and assign to left and right layers
@@ -478,7 +478,7 @@ function updateTrait(traitType, selection) {
   
   // Handle shared traits (Clothes)
   if (traitType === 'Clothes' && traitManifest.shared && traitManifest.shared.Clothes) {
-    img.src = `${CDN_BASE}/shared/Clothes/${selection}`;
+    img.src = `${CDN_BASE}/shared/Clothes/${encodeURIComponent(selection)}`;
     img.style.display = 'block';
     return;
   }
@@ -490,7 +490,7 @@ function updateTrait(traitType, selection) {
     // Check if this is a _direct option (format: "_direct|filename.png")
     if (selection.startsWith('_direct|')) {
       const filename = selection.split('|')[1];
-      img.src = `${CDN_BASE}/${currentSpecies}/${traitType}/${filename}`;
+      img.src = `${CDN_BASE}/${currentSpecies}/${traitType}/${encodeURIComponent(filename)}`;
       img.style.display = 'block';
       
       // For hogs, show base mouth layer when a direct mouth is selected
@@ -532,7 +532,7 @@ function updateTrait(traitType, selection) {
       skinColorFile = matchingSkin;
     }
     
-    img.src = `${CDN_BASE}/${currentSpecies}/${traitType}/${typeName}/${skinColorFile}`;
+    img.src = `${CDN_BASE}/${currentSpecies}/${traitType}/${encodeURIComponent(typeName)}/${encodeURIComponent(skinColorFile)}`;
     
     // For hogs, hide base mouth layer when a nested mouth is selected
     if (traitType === 'Mouth' && currentSpecies === 'hog') {
